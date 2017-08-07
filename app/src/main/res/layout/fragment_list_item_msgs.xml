@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clickable="true"
+                android:minHeight="?android:attr/listPreferredItemHeight">
+
+    <RelativeLayout
+        android:id="@+id/msgs_time_rl"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/msgs_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:maxEms="4"
+            android:maxLines="4"
+            android:scrollHorizontally="false"
+            tools:text="datetime"/>
+
+        <ImageView
+            android:id="@+id/msgs_image_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/msgs_time"
+            android:layout_centerHorizontal="true"
+            android:contentDescription="@string/msgs_image_view_cd"
+            tools:src="@android:drawable/ic_dialog_email"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/msgs_body_rl"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:background="@drawable/bg_incoming_bubble">
+
+        <TextView
+            android:id="@+id/msgs_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="4dp"
+            android:scrollHorizontally="false"
+            android:textStyle="bold"
+            tools:text="name"/>
+
+        <TextView
+            android:id="@+id/msgs_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/msgs_name"
+            android:layout_marginTop="4dp"
+            android:paddingBottom="4dp"
+            android:paddingEnd="4dp"
+            android:paddingStart="4dp"
+            android:scrollHorizontally="false"
+            tools:text="BODY"/>
+
+    </RelativeLayout>
+
+</RelativeLayout>
