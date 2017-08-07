@@ -80,10 +80,16 @@ public class DbSchema {
 
         public static final class Cols {
             public static final String ID = "ID";
+            public static final String IDINPHONE = "TXIDInPhone";
+            public static final String TELFROM = "TXTelFrom";
+            public static final String TELTO = "TXTelTo";
             public static final String DATA = "TXData";
             public static final String TYPE = "TXType";
             public static final String TIMESTAMP = "TXTimestamp";
+            public static final String SENT = "TXSent";
+            public static final String DELIVERED = "TXDelivered";
             public static final String RESULT = "TXResult";
+            public static final String ERROR = "TXError";
         }
     }
 }

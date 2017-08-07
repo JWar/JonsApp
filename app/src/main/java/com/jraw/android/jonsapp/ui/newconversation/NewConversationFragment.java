@@ -11,72 +11,22 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
+import com.jraw.android.jonsapp.MainActivity;
 import com.jraw.android.jonsapp.R;
 
 /**
  * Handles new conversations creation, including adding people to conversation.
  */
 public class NewConversationFragment extends Fragment {
-
+    private LinearLayout addContactsLL;
     private NewConversationFragmentInteractionListener mListener;
 
     public NewConversationFragment() {
         // Required empty public constructor
-    }
-
-    public void onAddPerson() {
-
-    }
-
-    //Individual method to set up textview with contacts name
-    private void setAddedContactTV(String aName) {
-        try {
-            RelativeLayout newView = new RelativeLayout(getActivity());
-            newView.setLayoutParams(
-                    new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
-                            ViewGroup.LayoutParams.WRAP_CONTENT));
-            ImageButton telLayoutIB = new ImageButton(getActivity());
-            telLayoutIB.setId(smsId);
-            telLayoutIB.setBackgroundColor(Color.TRANSPARENT);
-            telLayoutIB.setImageResource(R.drawable.pm_sms_icon);
-            telLayoutIB.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    onSMS(aPos);
-                }
-            });
-            RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,
-                    ViewGroup.LayoutParams.WRAP_CONTENT);
-            lp.setMarginEnd(24);
-            lp.setMarginStart(36);
-            lp.addRule(RelativeLayout.ALIGN_PARENT_END);
-            newView.addView(telLayoutIB, lp);
-            telLayoutIB = new ImageButton(getActivity());
-            telLayoutIB.setId(telId);
-            telLayoutIB.setBackgroundColor(Color.TRANSPARENT);
-            telLayoutIB.setImageResource(android.R.drawable.sym_action_call);
-            telLayoutIB.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    onTelCall(aTelNum);
-                }
-            });
-            lp = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,
-                    ViewGroup.LayoutParams.WRAP_CONTENT);
-
-            lp.addRule(RelativeLayout.START_OF, smsId);
-            lp.setMarginEnd(24);
-            newView.addView(telLayoutIB, lp);
-            lp = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
-                    ViewGroup.LayoutParams.WRAP_CONTENT);
-            lp.addRule(RelativeLayout.ALIGN_PARENT_START);
-            lp.addRule(RelativeLayout.START_OF, telId);
-
-            newView.addView(cET, 0, lp);
-            mTelScrollLL.addView(newView, aPos);
-        } catch (Exception e) {SgService.logDebug("Error in OnEditFragment.setTelET: " + e.getMessage());}
     }
 
     @Override
@@ -88,7 +38,7 @@ public class NewConversationFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_new_conversation, container, false);
-
+        addContactsLL = (LinearLayout) v.findViewById(R.id.new_conversation_contacts_ll);
         v.findViewById(R.id.new_conversation_add_person_button).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -96,6 +46,64 @@ public class NewConversationFragment extends Fragment {
             }
         });
         return v;
+    }
+
+    public void onAddPerson() {
+
+    }
+
+    //Individual method to add up textview with contacts name
+    private void setAddedContactTV(String aName) {
+        try {
+            TextView newContact = new TextView(getActivity());
+            newContact.setText(aName);
+            addContactsLL.addView(newContact, new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
+                    ViewGroup.LayoutParams.WRAP_CONTENT));
+//            RelativeLayout newView = new RelativeLayout(getActivity());
+//            newView.setLayoutParams(
+//                    new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
+//                            ViewGroup.LayoutParams.WRAP_CONTENT));
+//            ImageButton telLayoutIB = new ImageButton(getActivity());
+//            telLayoutIB.setId(smsId);
+//            telLayoutIB.setBackgroundColor(Color.TRANSPARENT);
+//            telLayoutIB.setImageResource(R.drawable.pm_sms_icon);
+//            telLayoutIB.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//                    onSMS(aPos);
+//                }
+//            });
+//            RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,
+//                    ViewGroup.LayoutParams.WRAP_CONTENT);
+//            lp.setMarginEnd(24);
+//            lp.setMarginStart(36);
+//            lp.addRule(RelativeLayout.ALIGN_PARENT_END);
+//            newView.addView(telLayoutIB, lp);
+//            telLayoutIB = new ImageButton(getActivity());
+//            telLayoutIB.setId(telId);
+//            telLayoutIB.setBackgroundColor(Color.TRANSPARENT);
+//            telLayoutIB.setImageResource(android.R.drawable.sym_action_call);
+//            telLayoutIB.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//                    onTelCall(aTelNum);
+//                }
+//            });
+//            lp = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,
+//                    ViewGroup.LayoutParams.WRAP_CONTENT);
+//
+//            lp.addRule(RelativeLayout.START_OF, smsId);
+//            lp.setMarginEnd(24);
+//            newView.addView(telLayoutIB, lp);
+//            lp = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
+//                    ViewGroup.LayoutParams.WRAP_CONTENT);
+//            lp.addRule(RelativeLayout.ALIGN_PARENT_START);
+//            lp.addRule(RelativeLayout.START_OF, telId);
+//
+//            newView.addView(cET, 0, lp);
+//            mTelScrollLL.addView(newView, aPos);
+        } catch (Exception e) {
+            MainActivity.logDebug("Error in OnEditFragment.setTelET: " + e.getMessage());}
     }
 
     @Override
