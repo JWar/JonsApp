@@ -45,7 +45,6 @@ public class NewConversationFragment extends Fragment {
                 onAddPerson();
             }
         });
-        
         return v;
     }
 
