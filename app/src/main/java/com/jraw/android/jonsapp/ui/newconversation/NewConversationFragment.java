@@ -39,6 +39,7 @@ public class NewConversationFragment extends Fragment {
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_new_conversation, container, false);
         addContactsLL = (LinearLayout) v.findViewById(R.id.new_conversation_contacts_ll);
+
         v.findViewById(R.id.new_conversation_add_person_button).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
