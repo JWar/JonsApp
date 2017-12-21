@@ -1,11 +1,14 @@
 package com.jraw.android.jonsapp.data.local.repositories;
 
-import android.content.Context;
 import android.database.Cursor;
+import android.support.annotation.NonNull;
 
+import com.jraw.android.jonsapp.data.local.ConversationLocalDataSource;
 import com.squareup.sqlbrite2.SqlBrite;
 
 import io.reactivex.Observable;
+
+import static com.google.common.base.Preconditions.checkNotNull;
 
 /**
  * Created by JWar on 19/12/2017.
@@ -15,16 +18,19 @@ import io.reactivex.Observable;
  */
 
 public class ConversationRepository {
+
     private static ConversationRepository sInstance=null;
+    private ConversationLocalDataSource mConversationLocalDataSource;
     private Cursor mQueryCursor;
-    public static synchronized ConversationRepository getInstance(Context aContext) {
+
+    public static synchronized ConversationRepository getInstance(@NonNull ConversationLocalDataSource aConversationLocalDataSource) {
         if (sInstance==null) {
-            sInstance = new ConversationRepository(aContext);
+            sInstance = new ConversationRepository(aConversationLocalDataSource);
         }
         return sInstance;
     }
-    private ConversationRepository(Context aContext) {
-
+    private ConversationRepository(@NonNull ConversationLocalDataSource aConversationLocalDataSource) {
+        mConversationLocalDataSource = checkNotNull(aConversationLocalDataSource);
     }
 
     public void setQuery(SqlBrite.Query aQuery) throws Exception {

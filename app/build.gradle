@@ -18,16 +18,16 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-    flavorDimensions "mock", "prod"
+    flavorDimensions "debug"
 
     // If you need to add more flavors, consider using flavor dimensions.
     productFlavors {
         mock {
-            dimension "mock"
+            dimension "debug"
             applicationIdSuffix = ".mock"
         }
         prod {
-            dimension "prod"
+            dimension "debug"
         }
     }
     // Remove mockRelease as it's not needed.
