@@ -1,10 +1,10 @@
-package com.jraw.android.jonsapp.data.local.repositories;
+package com.jraw.android.jonsapp.data.repositories;
 
 import android.database.Cursor;
 import android.database.Observable;
 import android.support.annotation.NonNull;
 
-import com.jraw.android.jonsapp.data.local.MsgLocalDataSource;
+import com.jraw.android.jonsapp.data.source.local.MsgLocalDataSource;
 import com.squareup.sqlbrite2.SqlBrite;
 
 import static com.google.common.base.Preconditions.checkNotNull;

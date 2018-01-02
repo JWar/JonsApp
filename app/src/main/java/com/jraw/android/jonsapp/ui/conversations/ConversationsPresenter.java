@@ -3,7 +3,7 @@ package com.jraw.android.jonsapp.ui.conversations;
 import android.support.annotation.NonNull;
 
 import com.jraw.android.jonsapp.MainActivity;
-import com.jraw.android.jonsapp.data.local.repositories.ConversationRepository;
+import com.jraw.android.jonsapp.data.repositories.ConversationRepository;
 import com.squareup.sqlbrite2.SqlBrite;
 
 import io.reactivex.disposables.CompositeDisposable;

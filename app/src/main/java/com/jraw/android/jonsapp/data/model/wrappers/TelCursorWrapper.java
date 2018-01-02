@@ -4,7 +4,7 @@ import android.database.Cursor;
 import android.database.CursorWrapper;
 
 import com.jraw.android.jonsapp.MainActivity;
-import com.jraw.android.jonsapp.data.local.DbSchema.TelTable;
+import com.jraw.android.jonsapp.data.source.local.database.DbSchema.TelTable;
 import com.jraw.android.jonsapp.data.model.Tel;
 
 /**

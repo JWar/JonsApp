@@ -1,4 +1,4 @@
-package com.jraw.android.jonsapp.data.local;
+package com.jraw.android.jonsapp.data.source.local.database;
 
 /**
  * Created by JonGaming on 29/06/2017.
@@ -15,8 +15,8 @@ public class DbSchema {
 
         public static final class Cols {
             public static final String ID = "ID";
-            public static final String FNAME = "PEFname";
-            public static final String SNAME = "PESname";
+            public static final String FIRSTNAME = "PEFirstname";
+            public static final String SURNAME = "PESurname";
         }
     }
 
@@ -42,19 +42,22 @@ public class DbSchema {
         public static final class Cols {
             public static final String ID = "ID";
             public static final String TITLE = "COTitle";
+            //This is the public id of the conversation shared by all persons IN the conversation.
+            //Cant use the id as this could clash.
+            public static final String PUBLICID = "COPublicId";
             //This holds the tel number of the person who created the conversation? Or the id? Or the name?
             public static final String CREATEDBY = "COCreatedBy";
             public static final String DATECREATED = "CODateCreated";
         }
     }
-
+    //This is needed to link Persons with Conversation. Basically all people in the conversation!
     public static final class PeCoTable {
         public static final String NAME = "peco";
 
         public static final class Cols {
             public static final String ID = "ID";
-            public static final String PEID = "PCPEID";
-            public static final String COID = "PCCOID";
+            public static final String PEID = "PCPEId";
+            public static final String COPUBLICID = "PCCOPublicId";
         }
     }
 
@@ -66,21 +69,36 @@ public class DbSchema {
             public static final String NUMBER = "TENumber";
         }
     }
+    //This links Persons with their tel numbers. Done in such a way as to allow multiple tels per person.
+    //Not sure how the app deals with it. Cant remember how Whatsapp deal with that..
     public static final class PeTelTable {
         public static final String NAME = "petel";
 
         public static final class Cols {
             public static final String ID = "ID";
-            public static final String PEID = "PTPEID";
-            public static final String TELID = "PTTelID";
+            public static final String PEID = "PTPEId";
+            public static final String TELID = "PTTelId";
         }
     }
+    /**
+     * TODO: 180102_ how to handle TelTo, i.e. sending this to all people in conversation
+     * Its easy if its one person... its just their tel or their id. Would it be best to
+     * have TelTo as a list of persons involved? This means the server needs to keep a record
+     * of tels to persons, but it should be doing that anyway...
+     * So TelTo becomes a list of tels to send this message to!
+     */
     public static final class TxnTable {
         public static final String NAME = "txn";
 
         public static final class Cols {
             public static final String ID = "ID";
-            public static final String IDINPHONE = "TXIDInPhone";
+            //180102_This is required so the phone that sent the txn knows which txn to delete if successful!
+            //No. This is redundant. This is needed in other app due to the way it works but not in JonsApp
+            //Hmm need Id of data, change this to DATAIDINPHONE so have quick way of accessing msg id.
+            //Urgh need to think about this.
+            //TODO: how to sort updating a msg's status as delivered/sent
+            //Needs msg id
+//            public static final String IDINPHONE = "TXIdInPhone";
             public static final String TELFROM = "TXTelFrom";
             public static final String TELTO = "TXTelTo";
             public static final String DATA = "TXData";

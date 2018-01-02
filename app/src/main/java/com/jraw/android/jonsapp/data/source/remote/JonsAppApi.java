@@ -1,4 +1,4 @@
-package com.jraw.android.jonsapp.data.remote;
+package com.jraw.android.jonsapp.data.source.remote;
 
 import org.json.JSONObject;
 

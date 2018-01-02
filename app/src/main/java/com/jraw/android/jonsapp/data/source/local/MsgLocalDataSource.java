@@ -1,4 +1,4 @@
-package com.jraw.android.jonsapp.data.local;
+package com.jraw.android.jonsapp.data.source.local;
 
 import android.support.annotation.NonNull;
 

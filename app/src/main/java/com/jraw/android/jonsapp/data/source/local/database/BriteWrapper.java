@@ -1,4 +1,4 @@
-package com.jraw.android.jonsapp.data.local;
+package com.jraw.android.jonsapp.data.source.local.database;
 
 import android.content.ContentValues;
 import android.database.Cursor;
@@ -6,7 +6,6 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
 import com.squareup.sqlbrite2.BriteDatabase;
-import com.squareup.sqlbrite2.SqlBrite;
 import com.squareup.sqlbrite2.SqlBrite.Query;
 
 import io.reactivex.Observable;

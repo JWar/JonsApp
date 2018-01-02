@@ -1,9 +1,9 @@
-package com.jraw.android.jonsapp.data.local.repositories;
+package com.jraw.android.jonsapp.data.repositories;
 
 import android.database.Cursor;
 import android.support.annotation.NonNull;
 
-import com.jraw.android.jonsapp.data.local.ConversationLocalDataSource;
+import com.jraw.android.jonsapp.data.source.local.ConversationLocalDataSource;
 import com.squareup.sqlbrite2.SqlBrite;
 
 import io.reactivex.Observable;
