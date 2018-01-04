@@ -2,10 +2,9 @@ package com.jraw.android.jonsapp.data.model.wrappers;
 
 import android.database.Cursor;
 import android.database.CursorWrapper;
-
-import com.jraw.android.jonsapp.MainActivity;
 import com.jraw.android.jonsapp.data.source.local.database.DbSchema.TelTable;
 import com.jraw.android.jonsapp.data.model.Tel;
+import com.jraw.android.jonsapp.utils.Utils;
 
 /**
  * Created by JonGaming on 22/07/2017.
@@ -28,7 +27,7 @@ public class TelCursorWrapper extends CursorWrapper {
             }
             return tel;
         } catch (Exception e) {
-            MainActivity.logDebug("Error in TelCursorWrapper.getTel: " + e.getMessage());
+            Utils.logDebug("Error in TelCursorWrapper.getTel: " + e.getMessage());
             return null;
         }
     }

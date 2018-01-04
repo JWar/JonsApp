@@ -15,7 +15,5 @@ public abstract class AbstractHolder extends RecyclerView.ViewHolder {
     public AbstractHolder(View itemView) {
         super(itemView);
     }
-
-    public abstract String bindData(Cursor aCursor, int aPos);
     public abstract void setListener(View.OnClickListener aListener);
 }

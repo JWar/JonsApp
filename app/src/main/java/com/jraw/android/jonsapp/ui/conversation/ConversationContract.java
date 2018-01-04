@@ -1,6 +1,8 @@
-package com.jraw.android.jonsapp.ui.conversations;
+package com.jraw.android.jonsapp.ui.conversation;
 
-import android.database.Cursor;
+import com.jraw.android.jonsapp.data.model.entity;
+
+import java.util.List;
 
 /**
  * Created by JWar on 19/12/2017.
@@ -10,10 +12,10 @@ import android.database.Cursor;
  *
  */
 
-public interface ConversationsContract {
+public interface ConversationContract {
     interface ViewConversations {
         //Sets ListHandler to use this list.
-        void setConversations(Cursor aCursor);
+        void setConversations(List<entity> aList);
         void setPresenter(PresenterConversations aPresenter);
     }
     interface PresenterConversations {

@@ -7,6 +7,8 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
+import com.jraw.android.jonsapp.data.model.Conversation;
+import com.jraw.android.jonsapp.data.model.Msg;
 import com.jraw.android.jonsapp.data.model.entity;
 import com.jraw.android.jonsapp.utils.Utils;
 
@@ -97,6 +99,13 @@ public class ListHandler {
 //        mRecyclerView.setVisibility(View.INVISIBLE);
 //        mLoadingIndicator.setVisibility(View.VISIBLE);
     }
+//
+//    public void swapConversations(List<Conversation> aList) {
+//        mListRecyclerAdapter.swapConversations(aList);
+//    }
+//    public void swapMsgs(List<Msg> aList) {
+//        mListRecyclerAdapter.swapMsgs(aList);
+//    }
 
     public void swapData(JSONArray aArray, Cursor aCur,
                          List<entity> aList, List<List<entity>> aXList) {

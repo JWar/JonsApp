@@ -1,7 +1,6 @@
 package com.jraw.android.jonsapp.data.model;
 
-import com.jraw.android.jonsapp.MainActivity;
-
+import com.jraw.android.jonsapp.utils.Utils;
 import org.json.JSONObject;
 
 /**
@@ -24,7 +23,7 @@ public class Person extends entity {
                 setPESname(aObj.getString("sname"));
             }
         } catch (Exception e) {
-            MainActivity.logDebug("Error in Person constructor: "+e.getMessage());
+            Utils.logDebug("Error in Person constructor: "+e.getMessage());
         }
     }
 

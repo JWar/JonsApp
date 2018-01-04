@@ -1,6 +1,7 @@
 package com.jraw.android.jonsapp.data.model;
 
-import com.jraw.android.jonsapp.MainActivity;
+import com.google.gson.annotations.SerializedName;
+import com.jraw.android.jonsapp.utils.Utils;
 
 import org.json.JSONObject;
 
@@ -10,16 +11,25 @@ import org.json.JSONObject;
  */
 
 public class Conversation extends entity {
+    @SerializedName("title")
     private String COTitle;
+    @SerializedName("publicid")
+    private int COPublicId;
+    @SerializedName("createdby")
     private String COCreatedBy;
+    @SerializedName("datecreated")
     private String CODateCreated;
 
     public Conversation() {}
 
+    //Hmm redundant due to GSON...?
     public Conversation(JSONObject aObj) {
         try {
             if (aObj.has("title")) {
                 setCOTitle(aObj.getString("title"));
+            }
+            if (aObj.has("publicid")) {
+                setCOPublicId(aObj.getInt("publicid"));
             }
             if (aObj.has("createdby")) {
                 setCOCreatedBy(aObj.getString("createdby"));
@@ -28,13 +38,14 @@ public class Conversation extends entity {
                 setCODateCreated(aObj.getString("datecreated"));
             }
         } catch (Exception e) {
-            MainActivity.logDebug("Error in Conversation constructor: "+e.getMessage());
+            Utils.logDebug("Error in Conversation constructor: "+e.getMessage());
         }
     }
 
     public void setCOTitle(String aStr) {
         COTitle = aStr;
     }
+    public void setCOPublicId(int aPublicId) {COPublicId=aPublicId;}
     public void setCOCreatedBy(String aStr) {
         COCreatedBy = aStr;
     }
@@ -44,6 +55,7 @@ public class Conversation extends entity {
     public String getCOTitle() {
         return COTitle;
     }
+    public int getCOPublicId() {return COPublicId;}
     public String getCOCreatedBy() {
         return COCreatedBy;
     }

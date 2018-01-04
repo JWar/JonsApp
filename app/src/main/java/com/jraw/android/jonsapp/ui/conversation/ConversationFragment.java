@@ -1,7 +1,6 @@
-package com.jraw.android.jonsapp.ui.conversations;
+package com.jraw.android.jonsapp.ui.conversation;
 
 
-import android.database.Cursor;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -14,7 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.jraw.android.jonsapp.R;
-import com.jraw.android.jonsapp.data.model.Conversation;
+import com.jraw.android.jonsapp.data.model.entity;
 import com.jraw.android.jonsapp.ui.list.ListHandler;
 import com.jraw.android.jonsapp.ui.list.ListHandlerCallback;
 import com.jraw.android.jonsapp.ui.list.ListRecyclerViewAdapter;
@@ -29,13 +28,13 @@ import java.util.List;
  * What about SearchViewQuerying? This will require options menu blah blah then setting the OnQueryHandler
  * as mPresenters getConverationsViaTitle
  */
-public class ConversationsFragment extends Fragment implements ConversationsContract.ViewConversations {
+public class ConversationFragment extends Fragment implements ConversationContract.ViewConversations {
 
-    private ConversationsContract.PresenterConversations mPresenter;
+    private ConversationContract.PresenterConversations mPresenter;
 
     private ListHandler mListHandler;
 
-    public ConversationsFragment() {}
+    public ConversationFragment() {}
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
@@ -66,12 +65,12 @@ public class ConversationsFragment extends Fragment implements ConversationsCont
     }
 
     @Override
-    public void setConversations(Cursor aCursor) {
-        mListHandler.swapData(null,aCursor,null,null);
+    public void setConversations(List<entity> aList) {
+        mListHandler.swapData(null,null,aList,null);
     }
 
     @Override
-    public void setPresenter(ConversationsContract.PresenterConversations aPresenter) {
+    public void setPresenter(ConversationContract.PresenterConversations aPresenter) {
         mPresenter = aPresenter;
     }
 

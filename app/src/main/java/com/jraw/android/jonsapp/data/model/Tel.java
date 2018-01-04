@@ -1,7 +1,6 @@
 package com.jraw.android.jonsapp.data.model;
 
-import com.jraw.android.jonsapp.MainActivity;
-
+import com.jraw.android.jonsapp.utils.Utils;
 import org.json.JSONObject;
 
 /**
@@ -20,7 +19,7 @@ public class Tel extends entity {
                 setTENumber(aObj.getString("tel"));
             }
         } catch (Exception e) {
-            MainActivity.logDebug("Error in Tel constructor: "+e.getMessage());
+            Utils.logDebug("Error in Tel constructor: "+e.getMessage());
         }
     }
 

@@ -2,6 +2,14 @@ package com.jraw.android.jonsapp.data.source.local;
 
 import android.support.annotation.NonNull;
 
+import com.jraw.android.jonsapp.data.model.Msg;
+import com.jraw.android.jonsapp.data.source.MsgDataSource;
+import com.jraw.android.jonsapp.data.source.local.database.BriteWrapper;
+
+import java.util.List;
+
+import io.reactivex.Observable;
+
 import static com.google.common.base.Preconditions.checkNotNull;
 
 /**
@@ -9,7 +17,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
  * Handles CRUDing Msgs.
  */
 
-public class MsgLocalDataSource {
+public class MsgLocalDataSource implements MsgDataSource {
 
     private static MsgLocalDataSource sInstance=null;
     private BriteWrapper mBriteWrapper;
@@ -22,5 +30,10 @@ public class MsgLocalDataSource {
     }
     private MsgLocalDataSource(@NonNull BriteWrapper aBriteWrapper) {
         mBriteWrapper = checkNotNull(aBriteWrapper);
+    }
+
+    @Override
+    public Observable<List<Msg>> getMsgs(int aCOId) {
+        return null;
     }
 }

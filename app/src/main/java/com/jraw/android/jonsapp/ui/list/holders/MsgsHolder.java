@@ -1,16 +1,14 @@
 package com.jraw.android.jonsapp.ui.list.holders;
 
-import android.database.Cursor;
 import android.os.Build;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-
-import com.jraw.android.jonsapp.MainActivity;
 import com.jraw.android.jonsapp.R;
 import com.jraw.android.jonsapp.data.model.Msg;
-import com.jraw.android.jonsapp.data.model.wrappers.MsgCursorWrapper;
+import com.jraw.android.jonsapp.data.model.entity;
+import com.jraw.android.jonsapp.utils.Utils;
 
 import org.json.JSONObject;
 
@@ -35,11 +33,11 @@ public class MsgsHolder extends AbstractHolder {
     public MsgsHolder(View view) {
         super(view);
         mView = view;
-        mBodyRL = view.findViewById(R.id.list_item_msgs_body_rl);
-        mTimeRL = view.findViewById(R.id.list_item_msgs_time_rl);
-        mDateTV = view.findViewById(R.id.list_item_msgs_time);
-        mNameTV = view.findViewById(R.id.list_item_msgs_name);
-        mBodyTV = view.findViewById(R.id.list_item_msgs_text_view);
+        mBodyRL = (RelativeLayout) view.findViewById(R.id.list_item_msgs_body_rl);
+        mTimeRL = (RelativeLayout) view.findViewById(R.id.list_item_msgs_time_rl);
+        mDateTV = (TextView) view.findViewById(R.id.list_item_msgs_time);
+        mNameTV = (TextView) view.findViewById(R.id.list_item_msgs_name);
+        mBodyTV = (TextView) view.findViewById(R.id.list_item_msgs_text_view);
     }
 
     private void setTimeToEnd() {
@@ -53,7 +51,7 @@ public class MsgsHolder extends AbstractHolder {
         lp = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT,
                 RelativeLayout.LayoutParams.WRAP_CONTENT);
         lp.setMargins(2, 24, 2, 4);
-        lp.addRule(RelativeLayout.START_OF, R.id.msgs_time_rl);
+        lp.addRule(RelativeLayout.START_OF, R.id.list_item_msgs_time_rl);
         mBodyRL.setLayoutParams(lp);
     }
 
@@ -73,9 +71,9 @@ public class MsgsHolder extends AbstractHolder {
                 RelativeLayout.LayoutParams.WRAP_CONTENT);
         lp.setMargins(2, 24, 2, 4);
         if (Build.VERSION.SDK_INT < 17) {
-            lp.addRule(RelativeLayout.RIGHT_OF, R.id.msgs_time_rl);
+            lp.addRule(RelativeLayout.RIGHT_OF, R.id.list_item_msgs_time_rl);
         } else {
-            lp.addRule(RelativeLayout.END_OF, R.id.msgs_time_rl);
+            lp.addRule(RelativeLayout.END_OF, R.id.list_item_msgs_time_rl);
         }
         mBodyRL.setLayoutParams(lp);
 //        mNameTV.setX(60);
@@ -121,13 +119,11 @@ public class MsgsHolder extends AbstractHolder {
         return aMsg.getId()+"";
     }
 
-    @Override
-    public String bindData(Cursor aCursor, int aPos) {
+    public String bindData(entity aEnt, int aPos) {
         try {
-            Msg msg = new MsgCursorWrapper(aCursor).getMsg();
-            return setViews(msg,aPos);
+            return setViews((Msg) aEnt,aPos);
         } catch (Exception e) {
-            MainActivity.logDebug("Error in MsgsHolder.bindData(Cur): " + e.getMessage());
+            Utils.logDebug("Error in MsgsHolder.bindData(Cur): " + e.getMessage());
             return null;
         }
     }

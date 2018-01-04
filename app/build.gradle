@@ -28,6 +28,7 @@ android {
         }
         prod {
             dimension "debug"
+            applicationId = "com.jraw.android.jonsapp"
         }
     }
     // Remove mockRelease as it's not needed.
@@ -45,6 +46,7 @@ android {
             showStandardStreams = true
         }
     }
+    sourceSets { main { java.srcDirs = ['src/main/java', 'src/main/java/mock'] } }
 }
 
 dependencies {

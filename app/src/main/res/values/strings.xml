@@ -6,8 +6,9 @@
     <string name="error_message_records">No records found</string>
 
     <string name="msgs_image_view_cd">Msgs Image View</string>
-    <string name="title_activity_msgs">MsgsActivity</string>
-    <string name="title_activity_contacts">ContactsActivity</string>
+    <string name="title_activity_conversations">Conversations</string>
+    <string name="title_activity_msgs">Msgs</string>
+    <string name="title_activity_contacts">Contacts</string>
 
     <string name="main_button_title">"Please select from the following options: "</string>
     <string name="main_button_conversations">Conversations</string>

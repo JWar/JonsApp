@@ -6,6 +6,7 @@ import android.widget.TextView;
 
 import com.jraw.android.jonsapp.R;
 import com.jraw.android.jonsapp.data.model.Conversation;
+import com.jraw.android.jonsapp.data.model.entity;
 import com.jraw.android.jonsapp.data.model.wrappers.ConversationCursorWrapper;
 
 /**
@@ -22,10 +23,8 @@ public class ConvsHolder extends AbstractHolder {
         mView = view;
         mTitleTV = view.findViewById(R.id.list_item_convs_title);
     }
-    @Override
-    public String bindData(Cursor aCursor, int aPos) {
-        Conversation conversation = new ConversationCursorWrapper(aCursor).getConversation();
-        return setViews(conversation,aPos);
+    public String bindData(entity aEnt, int aPos) {
+        return setViews((Conversation) aEnt,aPos);
     }
     private String setViews(Conversation aConv, int aPos) {
         mTitleTV.setText(aConv.getCOTitle());

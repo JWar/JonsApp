@@ -6,6 +6,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import com.jraw.android.jonsapp.R;
+import com.jraw.android.jonsapp.data.model.Conversation;
+import com.jraw.android.jonsapp.data.model.Msg;
 import com.jraw.android.jonsapp.data.model.entity;
 import com.jraw.android.jonsapp.ui.list.holders.AbstractHolder;
 import com.jraw.android.jonsapp.ui.list.holders.ConvsHolder;
@@ -21,6 +23,7 @@ import java.util.List;
  *
  * Customized adapter that takes in different viewholders to provide different information in each list item.
  * Not onCreateViewHolder needs to specify which holder to use based upon list type.
+ * TODO: 180104_think on a better way of handling different entity types that doesnt involve creating new methods/fields
  */
 public class ListRecyclerViewAdapter extends RecyclerView.Adapter<AbstractHolder> {
     private final ListHandlerCallback mListener;
@@ -30,6 +33,8 @@ public class ListRecyclerViewAdapter extends RecyclerView.Adapter<AbstractHolder
     private Cursor mCursor;
     //Probably redundant but put in just in case
     private List<entity> mList;
+//    private List<Conversation> mConversations;
+//    private List<Msg> mMsgs;
     private List<List<entity>> mXList;
 
     public ListRecyclerViewAdapter(ListHandlerCallback listener, int type) {
@@ -58,10 +63,18 @@ public class ListRecyclerViewAdapter extends RecyclerView.Adapter<AbstractHolder
     @Override
     public void onBindViewHolder(final AbstractHolder holder, final int position) {
         try {
-            String dId;
-            //Cursor used here!
-            mCursor.moveToPosition(position);
-            dId = holder.bindData(mCursor,position);
+            String dId=null;
+            //180104_Changed to using lists, sigh clumsy clumsy
+            if (holder instanceof MsgsHolder) {
+                MsgsHolder msgsHolder = (MsgsHolder) holder;
+                dId = msgsHolder.bindData(mList.get(position),position);
+            } else if (holder instanceof ConvsHolder) {
+                ConvsHolder convsHolder = (ConvsHolder) holder;
+                dId = convsHolder.bindData(mList.get(position),position);
+            }
+//            //Cursor used here!
+//            mCursor.moveToPosition(position);
+//            dId = holder.bindData(mCursor,position);
 
             final String dataId = dId;
             holder.setListener(new View.OnClickListener() {
@@ -111,7 +124,16 @@ public class ListRecyclerViewAdapter extends RecyclerView.Adapter<AbstractHolder
     }
     public void swapList(List<entity> aList) {
         mList = aList;
+        notifyDataSetChanged();
     }
+//    public void swapConversations(List<Conversation> aList) {
+//        mConversations = aList;
+//        notifyDataSetChanged();
+//    }
+//    public void swapMsgs(List<Msg> aList) {
+//        mMsgs = aList;
+//        notifyDataSetChanged();
+//    }
     public void swapXList(List<List<entity>> aXList) {
 
     }

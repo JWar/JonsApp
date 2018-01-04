@@ -12,7 +12,8 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import com.google.firebase.iid.FirebaseInstanceId;
+import com.jraw.android.jonsapp.data.source.local.database.DbHelper;
+import com.jraw.android.jonsapp.utils.Utils;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -24,10 +25,10 @@ public class MainActivity extends AppCompatActivity {
         public void onReceive(Context context, Intent intent) {
             //Get all your data from intent and do what you want
             if (intent.hasExtra("data")) {
-                MainActivity.logDebug("data");
+                Utils.logDebug("data: "+intent.getStringExtra("data"));
             }
             if (intent.hasExtra("body")) {
-                MainActivity.logDebug("body");
+                Utils.logDebug("body: "+intent.getStringExtra("body"));
             }
         }
     };
@@ -36,11 +37,12 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.main_toolbar);
+        Toolbar toolbar = findViewById(R.id.main_toolbar);
         setSupportActionBar(toolbar);
 
         LocalBroadcastManager.getInstance(getApplicationContext()).registerReceiver(mFirebaseReceiver,
                 new IntentFilter("noti"));
+
     }
 
     @Override
@@ -52,21 +54,11 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
         }
-
         return super.onOptionsItemSelected(item);
-    }
-
-    public static void logDebug(String aLog) {
-        Log.i(LOG_TAG, aLog);
     }
     @Override
     protected void onDestroy() {

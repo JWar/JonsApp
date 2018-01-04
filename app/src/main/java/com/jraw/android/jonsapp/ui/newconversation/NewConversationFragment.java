@@ -1,22 +1,16 @@
 package com.jraw.android.jonsapp.ui.newconversation;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.text.InputType;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.inputmethod.EditorInfo;
-import android.widget.ImageButton;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
-
-import com.jraw.android.jonsapp.MainActivity;
 import com.jraw.android.jonsapp.R;
+import com.jraw.android.jonsapp.utils.Utils;
 
 /**
  * Handles new conversations creation, including adding people to conversation.
@@ -25,9 +19,7 @@ public class NewConversationFragment extends Fragment {
     private LinearLayout addContactsLL;
     private NewConversationFragmentInteractionListener mListener;
 
-    public NewConversationFragment() {
-        // Required empty public constructor
-    }
+    public NewConversationFragment() {}
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -105,7 +97,7 @@ public class NewConversationFragment extends Fragment {
 //            newView.addView(cET, 0, lp);
 //            mTelScrollLL.addView(newView, aPos);
         } catch (Exception e) {
-            MainActivity.logDebug("Error in OnEditFragment.setTelET: " + e.getMessage());}
+            Utils.logDebug("Error in OnEditFragment.setTelET: " + e.getMessage());}
     }
 
     @Override

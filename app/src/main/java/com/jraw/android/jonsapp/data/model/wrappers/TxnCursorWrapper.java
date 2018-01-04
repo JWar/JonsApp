@@ -2,10 +2,9 @@ package com.jraw.android.jonsapp.data.model.wrappers;
 
 import android.database.Cursor;
 import android.database.CursorWrapper;
-
-import com.jraw.android.jonsapp.MainActivity;
 import com.jraw.android.jonsapp.data.source.local.database.DbSchema.TxnTable;
 import com.jraw.android.jonsapp.data.model.Txn;
+import com.jraw.android.jonsapp.utils.Utils;
 
 /**
  * Created by JonGaming on 22/07/2017.
@@ -42,6 +41,6 @@ public class TxnCursorWrapper extends CursorWrapper {
             }
             return txn;
         } catch (Exception e) {
-            MainActivity.logDebug("Error in TxnCursorWrapper.getTxn: "+e.getMessage());return null;}
+            Utils.logDebug("Error in TxnCursorWrapper.getTxn: "+e.getMessage());return null;}
     }
 }

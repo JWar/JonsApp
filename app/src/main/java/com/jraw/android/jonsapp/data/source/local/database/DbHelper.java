@@ -3,19 +3,17 @@ package com.jraw.android.jonsapp.data.source.local.database;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-
-import com.google.common.collect.Table;
 import com.jraw.android.jonsapp.data.source.local.database.DbSchema.*;
-
+import com.jraw.android.jonsapp.utils.Utils;
 
 /**
  * Created by JonGaming on 02/01/2018.
- *
+ * Quick and dirty data base creation.
  */
 
 public class DbHelper extends SQLiteOpenHelper {
-    private static final int VERSION = 1;
-    private static final String DATABASE_NAME = "JonsAppData";
+    public static final int VERSION = 1;
+    public static final String DATABASE_NAME = "JonsAppData";
 
     public DbHelper(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
         super(context, name, factory, version);
@@ -23,12 +21,37 @@ public class DbHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-
+        Utils.logDebug("DbHelper.onCreate");
+        db.execSQL(DATABASE_CREATE_PERSON);
+        db.execSQL(DATABASE_CREATE_CONVERSATION);
+        db.execSQL(DATABASE_CREATE_MSG);
+        db.execSQL(DATABASE_CREATE_TEL);
+        db.execSQL(DATABASE_CREATE_PETEL);
+        db.execSQL(DATABASE_CREATE_PECO);
+        db.execSQL(DATABASE_CREATE_TXN);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-
+        if (oldVersion != newVersion) {
+            // Simplest implementation is to drop all old tables and recreate them
+            //toExec needed because of lint error with string concatenation
+            String toExec = "DROP TABLE IF EXISTS " + DATABASE_CREATE_PERSON;
+            db.execSQL(toExec);
+            toExec = "DROP TABLE IF EXISTS " + DATABASE_CREATE_MSG;
+            db.execSQL(toExec);
+            toExec = "DROP TABLE IF EXISTS " + DATABASE_CREATE_CONVERSATION;
+            db.execSQL(toExec);
+            toExec = "DROP TABLE IF EXISTS " + DATABASE_CREATE_PECO;
+            db.execSQL(toExec);
+            toExec = "DROP TABLE IF EXISTS " + DATABASE_CREATE_TEL;
+            db.execSQL(toExec);
+            toExec = "DROP TABLE IF EXISTS " + DATABASE_CREATE_PETEL;
+            db.execSQL(toExec);
+            toExec = "DROP TABLE IF EXISTS " + DATABASE_CREATE_TXN;
+            db.execSQL(toExec);
+            onCreate(db);
+        }
     }
     private static final String DATABASE_CREATE_PERSON =
             "CREATE TABLE " + PersonTable.NAME + " (" +
@@ -75,8 +98,10 @@ public class DbHelper extends SQLiteOpenHelper {
                     TxnTable.Cols.TELFROM + " VARCHAR, " +
                     TxnTable.Cols.TELTO + " VARCHAR, " +
                     TxnTable.Cols.DATA + " VARCHAR DEFAULT NULL, " +
-                    TxnTable.Cols.TYPE + " INTEGER(3) DEFAULT NULL, " +
-                    TxnTable.Cols.PACKAGE + " INTEGER(11) DEFAULT NULL, " +
-                    TxnTable.Cols.DIALOGREF + " VARCHAR(15) DEFAULT NULL, " +
-                    TxnTable.Cols.SYNCED + " VARCHAR(15) DEFAULT NULL);";
+                    TxnTable.Cols.TYPE + " INTEGER(3) DEFAULT 0, " +
+                    TxnTable.Cols.TIMESTAMP + " VARCHAR DEFAULT NULL, " +
+                    TxnTable.Cols.SENT + " INTEGER(1) DEFAULT 0, " +
+                    TxnTable.Cols.DELIVERED + " INTEGER(1) DEFAULT 0, " +
+                    TxnTable.Cols.RESULT + " INTEGER(3) DEFAULT 0, " +
+                    TxnTable.Cols.ERROR+ " VARCHAR DEFAULT NULL);";
 }

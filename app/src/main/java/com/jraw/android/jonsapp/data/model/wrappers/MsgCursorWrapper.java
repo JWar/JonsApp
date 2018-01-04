@@ -2,9 +2,9 @@ package com.jraw.android.jonsapp.data.model.wrappers;
 
 import android.database.Cursor;
 import android.database.CursorWrapper;
-import com.jraw.android.jonsapp.MainActivity;
 import com.jraw.android.jonsapp.data.source.local.database.DbSchema.MsgTable;
 import com.jraw.android.jonsapp.data.model.Msg;
+import com.jraw.android.jonsapp.utils.Utils;
 
 /**
  * Created by JonGaming on 22/07/2017.
@@ -62,7 +62,7 @@ public class MsgCursorWrapper extends CursorWrapper {
             }
             return msg;
         } catch (Exception e) {
-            MainActivity.logDebug("Error in MsgCursorWrapper.getMsg: " + e.getMessage());
+            Utils.logDebug("Error in MsgCursorWrapper.getMsg: " + e.getMessage());
             return null;
         }
     }
