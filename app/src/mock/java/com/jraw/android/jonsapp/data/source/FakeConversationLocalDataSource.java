@@ -1,6 +1,6 @@
 package com.jraw.android.jonsapp.data.source;
 
-import com.jraw.android.jonsapp.data.model.Conversation;
+import com.jraw.android.jonsapp.data.model.entity;
 
 import java.util.List;
 
@@ -23,8 +23,13 @@ public class FakeConversationLocalDataSource implements ConversationDataSource {
     private FakeConversationLocalDataSource() {}
 
     @Override
-    public Observable<List<Conversation>> getConversations() {
+    public Observable<List<entity>> getConversations() {
         //Will return made up list for testing!
+        return null;
+    }
+
+    @Override
+    public Observable<List<entity>> getConversationsViaTitle(String aTitle) {
         return null;
     }
 }

@@ -13,4 +13,5 @@ import io.reactivex.Observable;
 
 public interface MsgDataSource {
     Observable<List<entity>> getMsgs(int aCOId);
+    Observable<List<entity>> getMsgsViaBody(int aCOId, String aBody);
 }

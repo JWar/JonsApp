@@ -1,11 +1,12 @@
 package com.jraw.android.jonsapp.data.repositories;
 
-import android.database.Observable;
 import android.support.annotation.NonNull;
-import com.jraw.android.jonsapp.data.model.Msg;
-import com.jraw.android.jonsapp.data.source.local.MsgLocalDataSource;
+import com.jraw.android.jonsapp.data.model.entity;
+import com.jraw.android.jonsapp.data.source.MsgDataSource;
 
 import java.util.List;
+
+import io.reactivex.Observable;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
@@ -17,19 +18,22 @@ import static com.google.common.base.Preconditions.checkNotNull;
 public class MsgRepository {
 
     private static MsgRepository sInstance=null;
-    private MsgLocalDataSource mMsgLocalDataSource;
+    private MsgDataSource mMsgDataSource;
 
-    public static synchronized MsgRepository getInstance(@NonNull MsgLocalDataSource aMsgLocalDataSource) {
+    public static synchronized MsgRepository getInstance(@NonNull MsgDataSource aMsgDataSource) {
         if (sInstance==null) {
-            sInstance = new MsgRepository(aMsgLocalDataSource);
+            sInstance = new MsgRepository(aMsgDataSource);
         }
         return sInstance;
     }
-    private MsgRepository(@NonNull MsgLocalDataSource aMsgLocalDataSource) {
-        mMsgLocalDataSource = checkNotNull(aMsgLocalDataSource);
+    private MsgRepository(@NonNull MsgDataSource aMsgDataSource) {
+        mMsgDataSource = checkNotNull(aMsgDataSource);
     }
-    public Observable<List<Msg>> getMsgs(int aConvId) {
-
-        return null;
+    public Observable<List<entity>> getMsgs(int aCOId) {
+        return mMsgDataSource.getMsgs(aCOId);
+    }
+    public Observable<List<entity>> getMsgsViaBody(int aCOId,
+                                                   String aBody) {
+        return mMsgDataSource.getMsgsViaBody(aCOId, aBody);
     }
 }

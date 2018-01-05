@@ -1,10 +1,8 @@
 package com.jraw.android.jonsapp.data.repositories;
 
 import android.support.annotation.NonNull;
-
-import com.jraw.android.jonsapp.data.model.Conversation;
 import com.jraw.android.jonsapp.data.model.entity;
-import com.jraw.android.jonsapp.data.source.local.ConversationLocalDataSource;
+import com.jraw.android.jonsapp.data.source.ConversationDataSource;
 
 import java.util.List;
 
@@ -25,22 +23,22 @@ import static com.google.common.base.Preconditions.checkNotNull;
 public class ConversationRepository {
 
     private static ConversationRepository sInstance=null;
-    private ConversationLocalDataSource mConversationLocalDataSource;
+    private ConversationDataSource mConversationDataSource;
 
-    public static synchronized ConversationRepository getInstance(@NonNull ConversationLocalDataSource aConversationLocalDataSource) {
+    public static synchronized ConversationRepository getInstance(@NonNull ConversationDataSource aConversationDataSource) {
         if (sInstance==null) {
-            sInstance = new ConversationRepository(aConversationLocalDataSource);
+            sInstance = new ConversationRepository(aConversationDataSource);
         }
         return sInstance;
     }
-    private ConversationRepository(@NonNull ConversationLocalDataSource aConversationLocalDataSource) {
-        mConversationLocalDataSource = checkNotNull(aConversationLocalDataSource);
+    private ConversationRepository(@NonNull ConversationDataSource aConversationDataSource) {
+        mConversationDataSource = checkNotNull(aConversationDataSource);
     }
 
     public Observable<List<entity>> getConversations() {
-        return mConversationLocalDataSource.getConversations();
+        return mConversationDataSource.getConversations();
     }
     public Observable<List<entity>> getConversationsViaTitle(String aTitle) {
-        return null;
+        return mConversationDataSource.getConversationsViaTitle(aTitle);
     }
 }

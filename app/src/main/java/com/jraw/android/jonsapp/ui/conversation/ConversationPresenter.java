@@ -4,6 +4,7 @@ import android.support.annotation.NonNull;
 import com.jraw.android.jonsapp.data.model.Conversation;
 import com.jraw.android.jonsapp.data.model.entity;
 import com.jraw.android.jonsapp.data.repositories.ConversationRepository;
+import com.jraw.android.jonsapp.utils.BaseSchedulerProvider;
 import com.jraw.android.jonsapp.utils.Utils;
 
 import java.util.List;
@@ -23,14 +24,21 @@ public class ConversationPresenter implements ConversationContract.PresenterConv
 
     private final ConversationRepository mConversationRepository;
 
+    @NonNull
+    private final BaseSchedulerProvider mBaseSchedulerProvider;
+
     //This ensures the observable is cleared when the presenter isnt in view. OnUnsubcribe is called in
     //onPause of fragment. OnResume 're-gets'.
     private CompositeDisposable mDisposables;
 
     private ConversationContract.ViewConversations mViewConversations;
 
-    public ConversationPresenter(@NonNull ConversationRepository aConversationRepository) {
+    public ConversationPresenter(@NonNull ConversationRepository aConversationRepository,
+                                 @NonNull BaseSchedulerProvider aBaseSchedulerProvider,
+                                 @NonNull ConversationContract.ViewConversations aViewConversations) {
         mConversationRepository = checkNotNull(aConversationRepository);
+        mBaseSchedulerProvider = checkNotNull(aBaseSchedulerProvider);
+        mViewConversations = checkNotNull(aViewConversations);
         mDisposables = new CompositeDisposable();
     }
 
@@ -38,6 +46,8 @@ public class ConversationPresenter implements ConversationContract.PresenterConv
     public void getConversations() {
         Disposable disposable = mConversationRepository
                 .getConversations()
+                                    //TODO:180105_<-- do I need to 'subscribeOn'? Isnt Brite automatically using alt thread??
+                .observeOn(mBaseSchedulerProvider.ui())//<-- means whatever results we get are processed on ui thread
                 .subscribe(new Consumer<List<entity>>() {
                     @Override
                     public void accept(List<entity> aConversations) throws Exception {
@@ -56,6 +66,8 @@ public class ConversationPresenter implements ConversationContract.PresenterConv
     public void getConversationsViaTitle(String aTitle) {
         Disposable disposable = mConversationRepository
                 .getConversationsViaTitle(aTitle)
+                                    //TODO:180105_<-- do I need to 'subscribeOn'? Isnt Brite automatically using alt thread??
+                .observeOn(mBaseSchedulerProvider.ui())//<-- means whatever results we get are processed on ui thread
                 .subscribe(new Consumer<List<entity>>() {
                     @Override
                     public void accept(List<entity> aConversations) throws Exception {
@@ -73,10 +85,8 @@ public class ConversationPresenter implements ConversationContract.PresenterConv
 
     @Override
     public void onUnsubscribe() {
-        clear();
-    }
-
-    public void clear() {
         mDisposables.clear();
     }
+
+
 }

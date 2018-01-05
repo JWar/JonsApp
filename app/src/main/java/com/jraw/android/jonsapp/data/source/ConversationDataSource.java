@@ -13,4 +13,5 @@ import io.reactivex.Observable;
 
 public interface ConversationDataSource {
     Observable<List<entity>> getConversations();
+    Observable<List<entity>> getConversationsViaTitle(String aTitle);
 }

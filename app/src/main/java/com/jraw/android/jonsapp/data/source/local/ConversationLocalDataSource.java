@@ -1,10 +1,13 @@
 package com.jraw.android.jonsapp.data.source.local;
 
+import android.database.Cursor;
 import android.support.annotation.NonNull;
 import com.jraw.android.jonsapp.data.model.entity;
+import com.jraw.android.jonsapp.data.model.wrappers.ConversationCursorWrapper;
 import com.jraw.android.jonsapp.data.source.ConversationDataSource;
 import com.jraw.android.jonsapp.data.source.local.database.BriteWrapper;
 import com.jraw.android.jonsapp.data.source.local.database.DbSchema.ConversationTable;
+import com.jraw.android.jonsapp.utils.Utils;
 import com.squareup.sqlbrite2.SqlBrite;
 
 import java.util.ArrayList;
@@ -34,7 +37,8 @@ public class ConversationLocalDataSource implements ConversationDataSource {
     private ConversationLocalDataSource(@NonNull BriteWrapper aBriteWrapper) {
         mBriteWrapper = checkNotNull(aBriteWrapper);
     }
-
+    //Conversations sorted in alphabetical order for now. Of course best way is to do it in
+    //newest message order. But cba.
     @Override
     public Observable<List<entity>> getConversations() {
         return mBriteWrapper.createQuery(ConversationTable.NAME,
@@ -44,6 +48,32 @@ public class ConversationLocalDataSource implements ConversationDataSource {
                     @Override
                     public List<entity> apply(SqlBrite.Query aQuery) throws Exception {
                         List<entity> entList = new ArrayList<>();
+                        ConversationCursorWrapper cursor = new ConversationCursorWrapper(aQuery.run());
+                        while (cursor.moveToNext()) {
+                            entList.add(cursor.getConversation());
+                        }
+                        Utils.closeCursor(cursor);
+                        return entList;
+                    }
+                });
+    }
+
+    @Override
+    public Observable<List<entity>> getConversationsViaTitle(String aTitle) {
+        return mBriteWrapper.createQuery(ConversationTable.NAME,
+                "SELECT * FROM "+ ConversationTable.NAME
+                        + " WHERE "+ConversationTable.Cols.TITLE + " LIKE ?"
+                        + " ORDER BY " + ConversationTable.Cols.TITLE + " ASC",
+                "%"+aTitle+"%")
+                .map(new Function<SqlBrite.Query, List<entity>>() {
+                    @Override
+                    public List<entity> apply(SqlBrite.Query aQuery) throws Exception {
+                        List<entity> entList = new ArrayList<>();
+                        ConversationCursorWrapper cursor = new ConversationCursorWrapper(aQuery.run());
+                        while (cursor.moveToNext()) {
+                            entList.add(cursor.getConversation());
+                        }
+                        Utils.closeCursor(cursor);
                         return entList;
                     }
                 });
