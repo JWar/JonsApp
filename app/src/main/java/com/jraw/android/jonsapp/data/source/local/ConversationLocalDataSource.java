@@ -1,12 +1,11 @@
 package com.jraw.android.jonsapp.data.source.local;
 
-import android.database.Cursor;
 import android.support.annotation.NonNull;
 import com.jraw.android.jonsapp.data.model.entity;
 import com.jraw.android.jonsapp.data.model.wrappers.ConversationCursorWrapper;
 import com.jraw.android.jonsapp.data.source.ConversationDataSource;
-import com.jraw.android.jonsapp.data.source.local.database.BriteWrapper;
-import com.jraw.android.jonsapp.data.source.local.database.DbSchema.ConversationTable;
+import com.jraw.android.jonsapp.database.BriteWrapper;
+import com.jraw.android.jonsapp.database.DbSchema.ConversationTable;
 import com.jraw.android.jonsapp.utils.Utils;
 import com.squareup.sqlbrite2.SqlBrite;
 

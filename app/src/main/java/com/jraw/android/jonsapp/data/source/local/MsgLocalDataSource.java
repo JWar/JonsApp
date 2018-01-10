@@ -4,8 +4,8 @@ import android.support.annotation.NonNull;
 import com.jraw.android.jonsapp.data.model.entity;
 import com.jraw.android.jonsapp.data.model.wrappers.MsgCursorWrapper;
 import com.jraw.android.jonsapp.data.source.MsgDataSource;
-import com.jraw.android.jonsapp.data.source.local.database.BriteWrapper;
-import com.jraw.android.jonsapp.data.source.local.database.DbSchema.MsgTable;
+import com.jraw.android.jonsapp.database.BriteWrapper;
+import com.jraw.android.jonsapp.database.DbSchema.MsgTable;
 import com.jraw.android.jonsapp.utils.Utils;
 import com.squareup.sqlbrite2.SqlBrite;
 

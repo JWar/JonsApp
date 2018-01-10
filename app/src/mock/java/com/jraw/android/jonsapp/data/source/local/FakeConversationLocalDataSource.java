@@ -1,6 +1,7 @@
-package com.jraw.android.jonsapp.data.source;
+package com.jraw.android.jonsapp.data.source.local;
 
 import com.jraw.android.jonsapp.data.model.entity;
+import com.jraw.android.jonsapp.data.source.ConversationDataSource;
 
 import java.util.List;
 

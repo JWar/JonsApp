@@ -1,4 +1,4 @@
-package com.jraw.android.jonsapp.data.source.local.database;
+package com.jraw.android.jonsapp.database;
 
 /**
  * Created by JonGaming on 29/06/2017.

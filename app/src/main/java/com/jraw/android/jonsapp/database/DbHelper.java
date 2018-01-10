@@ -1,9 +1,9 @@
-package com.jraw.android.jonsapp.data.source.local.database;
+package com.jraw.android.jonsapp.database;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import com.jraw.android.jonsapp.data.source.local.database.DbSchema.*;
+import com.jraw.android.jonsapp.database.DbSchema.*;
 import com.jraw.android.jonsapp.utils.Utils;
 
 /**

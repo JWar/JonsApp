@@ -1,4 +1,4 @@
-package com.jraw.android.jonsapp.data.source.local.database;
+package com.jraw.android.jonsapp.database;
 
 import android.content.ContentValues;
 import android.database.Cursor;

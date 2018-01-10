@@ -2,7 +2,7 @@ package com.jraw.android.jonsapp.data.model.wrappers;
 
 import android.database.Cursor;
 import android.database.CursorWrapper;
-import com.jraw.android.jonsapp.data.source.local.database.DbSchema.TelTable;
+import com.jraw.android.jonsapp.database.DbSchema.TelTable;
 import com.jraw.android.jonsapp.data.model.Tel;
 import com.jraw.android.jonsapp.utils.Utils;
 

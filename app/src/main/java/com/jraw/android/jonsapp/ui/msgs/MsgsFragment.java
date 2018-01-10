@@ -1,4 +1,4 @@
-package com.jraw.android.jonsapp.ui.conversation;
+package com.jraw.android.jonsapp.ui.msgs;
 
 
 import android.os.Bundle;
@@ -17,77 +17,96 @@ import com.jraw.android.jonsapp.data.model.entity;
 import com.jraw.android.jonsapp.ui.list.ListHandler;
 import com.jraw.android.jonsapp.ui.list.ListHandlerCallback;
 import com.jraw.android.jonsapp.ui.list.ListRecyclerViewAdapter;
-import com.jraw.android.jonsapp.ui.msgs.MsgsActivity;
 
 import java.util.List;
 
 /**
- * Handles the View part of Conversations feature. Gets Conversation List from Presenter.
- *
- * Since it doesnt need an id or ref to get the conversations there is no need for savedInstanceState.
- *
- * What about SearchViewQuerying? This will require options menu blah blah then setting the OnQueryHandler
- * as mPresenters getConverationsViaTitle
+ * A simple {@link Fragment} subclass.
  */
-public class ConversationFragment extends Fragment implements ConversationContract.ViewConversations {
+public class MsgsFragment extends Fragment implements MsgsContract.ViewMsgs {
 
-    public static final String TAG = "conversationFragTag";
+    public static final String TAG = "msgsFragTag";
+    private static final String CO_ID = "coId";
+    private int mCOId;
 
-    private ConversationContract.PresenterConversations mPresenter;
+    private MsgsContract.PresenterMsgs mPresenterMsgs;
 
     private ListHandler mListHandler;
 
-    public ConversationFragment() {}
+    public MsgsFragment() {}
+
+    public static MsgsFragment getInstance(int aCOID) {
+        MsgsFragment fragment = new MsgsFragment();
+        Bundle bundle = new Bundle();
+        bundle.putInt(CO_ID,aCOID);
+        fragment.setArguments(bundle);
+        return fragment;
+    }
 
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        if (savedInstanceState!=null) {
+            mCOId = savedInstanceState.getInt(CO_ID);
+        } else if (getArguments()!=null) {
+            mCOId = getArguments().getInt(CO_ID);
+        }
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_conversations, container, false);
+        // Inflate the layout for this fragment
+        return inflater.inflate(R.layout.fragment_msgs, container, false);
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         //Set ListHandler here
-        RecyclerView recyclerView = view.findViewById(R.id.fragment_conversations_recycler_view);
+        RecyclerView recyclerView = view.findViewById(R.id.fragment_msgs_recycler_view);
         mListHandler = new ListHandler(this,
                 recyclerView,
                 new ListRecyclerViewAdapter(new ListHandlerCallback() {
                     @Override
                     public void onListClick(int aPosition, String aId) {
                         //This is what is set on every item in the list
-                        MsgsActivity.start(getContext(),Integer.parseInt(aId));
+                        //TODO: what to do on msg click??
                     }
 
                     @Override
                     public void onListTouch(View aView, MotionEvent aMotionEvent) {
                         //This is what is set on every item in the list
                     }
-                }, R.layout.fragment_list_item_convs),
+                }, R.layout.fragment_list_item_msgs),
                 new LinearLayoutManager(recyclerView.getContext(),LinearLayoutManager.VERTICAL,false));
     }
 
     @Override
-    public void setConversations(List<entity> aList) {
+    public void setMsgs(List<entity> aList) {
         mListHandler.swapData(null,null,aList,null);
     }
 
     @Override
-    public void setPresenter(ConversationContract.PresenterConversations aPresenter) {
-        mPresenter = aPresenter;
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        //Get data
-        mPresenter.getConversations();
+    public void setPresenter(MsgsContract.PresenterMsgs aPresenter) {
+        mPresenterMsgs=aPresenter;
     }
 
     @Override
     public void onPause() {
         super.onPause();
-        //Ensures the observables arent subscribed when the screen isnt showing.
-        mPresenter.onUnsubscribe();
+        mPresenterMsgs.onUnsubscribe();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        mPresenterMsgs.getMsgs(mCOId);
+    }
+
+    @Override
+    public void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putInt(CO_ID,mCOId);
     }
 }

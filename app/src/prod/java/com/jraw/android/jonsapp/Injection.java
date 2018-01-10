@@ -5,9 +5,16 @@ import android.support.annotation.NonNull;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.jraw.android.jonsapp.data.source.local.database.BriteWrapper;
-import com.jraw.android.jonsapp.data.source.local.database.DbHelper;
+import com.jraw.android.jonsapp.data.repositories.ConversationRepository;
+import com.jraw.android.jonsapp.data.repositories.MsgRepository;
+import com.jraw.android.jonsapp.data.source.ConversationDataSource;
+import com.jraw.android.jonsapp.data.source.MsgDataSource;
+import com.jraw.android.jonsapp.data.source.local.ConversationLocalDataSource;
+import com.jraw.android.jonsapp.data.source.local.MsgLocalDataSource;
+import com.jraw.android.jonsapp.database.BriteWrapper;
+import com.jraw.android.jonsapp.database.DbHelper;
 import com.jraw.android.jonsapp.data.source.remote.JonsAppApi;
+import com.jraw.android.jonsapp.utils.BaseSchedulerProvider;
 import com.jraw.android.jonsapp.utils.DoubleTypeAdapter;
 import com.jraw.android.jonsapp.utils.SchedulerProvider;
 import com.squareup.sqlbrite2.SqlBrite;
@@ -22,6 +29,22 @@ import retrofit2.converter.gson.GsonConverterFactory;
  */
 
 public class Injection {
+
+    public static ConversationRepository provideConversationRepository(@NonNull Context aContext) throws Exception {
+        return ConversationRepository.getInstance(provideConversationDataSource(aContext));
+    }
+    public static MsgRepository provideMsgRepository(@NonNull Context aContext) throws Exception {
+        return MsgRepository.getInstance(provideMsgDataSource(aContext));
+    }
+    public static ConversationDataSource provideConversationDataSource(@NonNull Context aContext) throws Exception {
+        return ConversationLocalDataSource.getInstance(provideBriteWrapper(aContext));
+    }
+    public static MsgDataSource provideMsgDataSource(@NonNull Context aContext) throws Exception {
+        return MsgLocalDataSource.getInstance(provideBriteWrapper(aContext));
+    }
+    public static BaseSchedulerProvider provideBaseSchedulerProvider() throws Exception {
+        return SchedulerProvider.getInstance();
+    }
     public static BriteWrapper provideBriteWrapper(@NonNull Context aContext) throws Exception {
         return BriteWrapper.getInstance(
                 new SqlBrite.Builder().build().wrapDatabaseHelper(
