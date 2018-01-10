@@ -5,9 +5,14 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -37,7 +42,9 @@ public class ConversationFragment extends Fragment implements ConversationContra
 
     private ListHandler mListHandler;
 
-    public ConversationFragment() {}
+    public ConversationFragment() {
+        setHasOptionsMenu(true);
+    }
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
@@ -89,5 +96,36 @@ public class ConversationFragment extends Fragment implements ConversationContra
         super.onPause();
         //Ensures the observables arent subscribed when the screen isnt showing.
         mPresenter.onUnsubscribe();
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.menu_conversations, menu);
+        super.onCreateOptionsMenu(menu, inflater);
+    }
+
+    @Override
+    public void onPrepareOptionsMenu(Menu menu) {
+        MenuItem actionViewItem = menu.findItem(R.id.conversations_search_item);
+        if (actionViewItem != null) {
+            View v = actionViewItem.getActionView();
+            final SearchView sV = v.findViewById(R.id.conversations_search_view);
+            sV.setQuery("", false);
+            sV.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+                @Override
+                public boolean onQueryTextSubmit(String query) {
+                    mPresenter.getConversationsViaTitle(query);
+                    sV.clearFocus();//Closes keyboard input
+                    return true;
+                }
+
+                @Override
+                public boolean onQueryTextChange(String newText) {
+                    mPresenter.getConversationsViaTitle(newText);
+                    return true;
+                }
+            });
+        }
+        super.onPrepareOptionsMenu(menu);
     }
 }

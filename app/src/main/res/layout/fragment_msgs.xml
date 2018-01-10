@@ -1,13 +1,21 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.jraw.android.jonsapp.ui.msgs.MsgsFragment">
 
+    <include
+        android:id="@+id/search_bar"
+        layout="@layout/search_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"/>
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/fragment_msgs_recycler_view"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_below="@+id/search_bar">
     </android.support.v7.widget.RecyclerView>
 
-</FrameLayout>
+</RelativeLayout>

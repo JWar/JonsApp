@@ -7,6 +7,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -17,13 +18,21 @@ import com.jraw.android.jonsapp.data.model.entity;
 import com.jraw.android.jonsapp.ui.list.ListHandler;
 import com.jraw.android.jonsapp.ui.list.ListHandlerCallback;
 import com.jraw.android.jonsapp.ui.list.ListRecyclerViewAdapter;
+import com.jraw.android.jonsapp.ui.searchbar.SearchBar;
+import com.jraw.android.jonsapp.ui.searchbar.SearchBarContract;
 
 import java.util.List;
 
 /**
- * A simple {@link Fragment} subclass.
+ * Handles View part of Msgs functionality.
+ * Holds list of msgs.
+ *
+ * Uses a custom 'ActionBar' called SearchBar. Simply provides a SearchView for the user to query
+ * data via Presenter. Should be flexible and easily added to other views. Can also be extended and
+ * allows for communication between host and SearchBar. Its basically a View so resides in View part.
  */
-public class MsgsFragment extends Fragment implements MsgsContract.ViewMsgs {
+public class MsgsFragment extends Fragment implements MsgsContract.ViewMsgs,
+        SearchBarContract.SearchBarHost {
 
     public static final String TAG = "msgsFragTag";
     private static final String CO_ID = "coId";
@@ -32,6 +41,9 @@ public class MsgsFragment extends Fragment implements MsgsContract.ViewMsgs {
     private MsgsContract.PresenterMsgs mPresenterMsgs;
 
     private ListHandler mListHandler;
+
+    //This is open to extension! I.e. what about other types of search... Hence why its a variable
+    private SearchBarContract.SearchBar mSearchBar;
 
     public MsgsFragment() {}
 
@@ -80,6 +92,20 @@ public class MsgsFragment extends Fragment implements MsgsContract.ViewMsgs {
                     }
                 }, R.layout.fragment_list_item_msgs),
                 new LinearLayoutManager(recyclerView.getContext(),LinearLayoutManager.VERTICAL,false));
+
+        mSearchBar = new SearchBar(this, view);
+        mSearchBar.setSearchViewQueryListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                mPresenterMsgs.getMsgsViaBody(mCOId,query);
+                return false;
+            }
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                mPresenterMsgs.getMsgsViaBody(mCOId,newText);
+                return false;
+            }
+        });
     }
 
     @Override
@@ -90,6 +116,11 @@ public class MsgsFragment extends Fragment implements MsgsContract.ViewMsgs {
     @Override
     public void setPresenter(MsgsContract.PresenterMsgs aPresenter) {
         mPresenterMsgs=aPresenter;
+    }
+
+    @Override
+    public void clear() {
+        mSearchBar.clear();
     }
 
     @Override
@@ -108,5 +139,11 @@ public class MsgsFragment extends Fragment implements MsgsContract.ViewMsgs {
     public void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putInt(CO_ID,mCOId);
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        clear();
     }
 }
