@@ -1,8 +1,11 @@
 package com.jraw.android.jonsapp.data.source.local;
 
+import com.jraw.android.jonsapp.DummyData;
+import com.jraw.android.jonsapp.data.model.Conversation;
 import com.jraw.android.jonsapp.data.model.entity;
 import com.jraw.android.jonsapp.data.source.ConversationDataSource;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import io.reactivex.Observable;
@@ -13,7 +16,10 @@ import io.reactivex.Observable;
  */
 
 public class FakeConversationLocalDataSource implements ConversationDataSource {
+
     private static FakeConversationLocalDataSource sInstance;
+
+    private List<entity> mFakeData = new ArrayList<>();
 
     public static FakeConversationLocalDataSource getInstance() {
         if (sInstance==null) {
@@ -21,16 +27,25 @@ public class FakeConversationLocalDataSource implements ConversationDataSource {
         }
         return sInstance;
     }
-    private FakeConversationLocalDataSource() {}
+    private FakeConversationLocalDataSource() {
+        mFakeData = DummyData.getConversations();
+    }
 
     @Override
     public Observable<List<entity>> getConversations() {
-        //Will return made up list for testing!
-        return null;
+        return Observable.just(mFakeData);
     }
 
     @Override
     public Observable<List<entity>> getConversationsViaTitle(String aTitle) {
-        return null;
+        List<entity> dataToReturn = new ArrayList<>();
+        for (entity ent: mFakeData) {
+            Conversation conv = (Conversation) ent;
+            if (conv.getCOTitle().contains(aTitle)) {
+                dataToReturn.add(ent);
+            }
+        }
+        return Observable.just(dataToReturn);
+
     }
 }

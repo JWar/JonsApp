@@ -9,27 +9,43 @@ import org.json.JSONObject;
  */
 
 public class Msg extends entity {
-    private int MSCOID = 0;
-    private int MSToID = 0;
-    private int MSFromID = 0;
+
+    public enum MSG_TYPES {
+        TEXT, IMAGE, VIDEO
+    }
+    //Of course if its sent then its not delivered, if its delivered its not read...
+    public enum RESULTS {
+        SENT, DELIVERED, READ, FAILED
+    }
+    //Which conversation this msg is part of, uses public id...
+    private int MSCOPublicId = 0;
+    //Supposed to be the ID this msg is to but redundant given the way COID handles everything
+    private int MSToId = 0;
+    //See MSToID above, although knowing who the msg is from is necessary. Remove toId?
+    private int MSFromId = 0;
+    //Content of Msg
     private String MSBody;
+    //Msg date
     private String MSEventDate;
+    //Type of msg? Text,image,video?
     private int MSType = 0;
+    //Data?? Presumably if this msg has image or video
     private String MSData;
-    private String MSResult;
+    //Read,sent,delivered etc...
+    private int MSResult;
 
     public Msg() {}
 
     public Msg(JSONObject aObj) {
         try {
             if (aObj.has("coid")) {
-                setMSCOID(aObj.getInt("coid"));
+                setMSCOPublicId(aObj.getInt("coid"));
             }
             if (aObj.has("toid")) {
-                setMSToID(aObj.getInt("toid"));
+                setMSToId(aObj.getInt("toid"));
             }
             if (aObj.has("fromid")) {
-                setMSFromID(aObj.getInt("fromid"));
+                setMSFromId(aObj.getInt("fromid"));
             }
             if (aObj.has("body")) {
                 setMSBody(aObj.getString("body"));
@@ -44,21 +60,21 @@ public class Msg extends entity {
                 setMSData(aObj.getString("data"));
             }
             if (aObj.has("result")) {
-                setMSResult(aObj.getString("result"));
+                setMSResult(aObj.getInt("result"));
             }
         } catch (Exception e) {
             Utils.logDebug("Error in Msg constructor: "+e.getMessage());
         }
     }
 
-    public void setMSCOID(int aInt) {
-        MSCOID = aInt;
+    public void setMSCOPublicId(int aInt) {
+        MSCOPublicId = aInt;
     }
-    public void setMSToID(int aInt) {
-        MSToID = aInt;
+    public void setMSToId(int aInt) {
+        MSToId = aInt;
     }
-    public void setMSFromID(int aInt) {
-        MSFromID = aInt;
+    public void setMSFromId(int aInt) {
+        MSFromId = aInt;
     }
     public void setMSBody(String aStr) {
         MSBody = aStr;
@@ -72,18 +88,18 @@ public class Msg extends entity {
     public void setMSData(String aStr) {
         MSData = aStr;
     }
-    public void setMSResult(String aStr) {
-        MSResult = aStr;
+    public void setMSResult(int aInt) {
+        MSResult = aInt;
     }
 
-    public int getMSCOID() {
-        return MSCOID;
+    public int getMSCOPublicId() {
+        return MSCOPublicId;
     }
-    public int getMSToID() {
-        return MSToID;
+    public int getMSToId() {
+        return MSToId;
     }
-    public int getMSFromID() {
-        return MSFromID;
+    public int getMSFromId() {
+        return MSFromId;
     }
     public String getMSBody() {
         return MSBody;
@@ -97,7 +113,7 @@ public class Msg extends entity {
     public String getMSData() {
         return MSData;
     }
-    public String getMSResult() {
+    public int getMSResult() {
         return MSResult;
     }
 }

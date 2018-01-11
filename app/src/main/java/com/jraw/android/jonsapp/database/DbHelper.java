@@ -61,16 +61,17 @@ public class DbHelper extends SQLiteOpenHelper {
     private static final String DATABASE_CREATE_MSG =
             "CREATE TABLE " + MsgTable.NAME + " (" +
                     MsgTable.Cols.ID + " INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, " +
-                    MsgTable.Cols.COID + " INTEGER(11) DEFAULT 0, " +
+                    MsgTable.Cols.COPUBLICID + " INTEGER(11) DEFAULT 0, " +
                     MsgTable.Cols.TOID + " INTEGER(11) DEFAULT 0, " +
                     MsgTable.Cols.FROMID + " INTEGER(11) DEFAULT 0, " +
                     MsgTable.Cols.BODY + " VARCHAR DEFAULT NULL, " +
                     MsgTable.Cols.EVENTDATE + " VARCHAR DEFAULT NULL, " +
+                    //Type of msg - text, img, video
                     MsgTable.Cols.TYPE + " INTEGER(3) DEFAULT 0, " +
                     //Cant remember what Data is? Is it blob? I.e. for images?
                     MsgTable.Cols.DATA + " VARCHAR DEFAULT NULL, " +
                     //This is the result code for the msg txn?
-                    MsgTable.Cols.RESULT+ " INTEGER(3) DEFAULT 0);";
+                    MsgTable.Cols.RESULT + " INTEGER(3) DEFAULT 0);";
     private static final String DATABASE_CREATE_CONVERSATION =
             "CREATE TABLE " + ConversationTable.NAME + " (" +
                     ConversationTable.Cols.ID + " INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, " +
