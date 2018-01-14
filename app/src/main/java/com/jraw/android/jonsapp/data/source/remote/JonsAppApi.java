@@ -20,7 +20,7 @@ public interface JonsAppApi {
         TEL, STAFF, STAFF_LIST, CLIENT_LIST, PRLASTPES, KNOWNPES
     }
 
-    String END_POINT = "http://51.7.163.110:10000/jrclient_1.0.2/";
+    String END_POINT = "TBC";
 
     @GET("listperson.aj")
     Observable<ResponseJonsApp> getPersons(@Query("crit") String aCrit,

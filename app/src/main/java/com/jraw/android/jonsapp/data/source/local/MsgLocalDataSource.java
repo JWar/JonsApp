@@ -41,7 +41,7 @@ public class MsgLocalDataSource implements MsgDataSource {
     public Observable<List<entity>> getMsgs(int aCOId) {
         return mBriteWrapper.createQuery(MsgTable.NAME,
                 "SELECT * FROM "+ MsgTable.NAME
-                        + " WHERE " + MsgTable.Cols.COID + "=" + aCOId
+                        + " WHERE " + MsgTable.Cols.COPUBLICID + "=" + aCOId
                         + " ORDER BY " + MsgTable.Cols.EVENTDATE + " DESC")
                 .map(new Function<SqlBrite.Query, List<entity>>() {
                     @Override
@@ -61,7 +61,7 @@ public class MsgLocalDataSource implements MsgDataSource {
     public Observable<List<entity>> getMsgsViaBody(int aCOId, String aBody) {
         return mBriteWrapper.createQuery(MsgTable.NAME,
                 "SELECT * FROM "+ MsgTable.NAME
-                        + " WHERE " + MsgTable.Cols.COID + "=" + aCOId
+                        + " WHERE " + MsgTable.Cols.COPUBLICID + "=" + aCOId
                         + " AND " + MsgTable.Cols.BODY + " LIKE ?"
                         + " ORDER BY " + MsgTable.Cols.EVENTDATE + " DESC",
                 "%"+aBody+"%")

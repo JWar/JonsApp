@@ -1,4 +1,4 @@
-package com.jraw.android.jonsapp;
+package com.jraw.android.jonsapp.utils;
 
 import com.jraw.android.jonsapp.data.model.Conversation;
 import com.jraw.android.jonsapp.data.model.Msg;

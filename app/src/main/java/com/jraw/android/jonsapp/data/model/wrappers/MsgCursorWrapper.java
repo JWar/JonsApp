@@ -20,19 +20,19 @@ public class MsgCursorWrapper extends CursorWrapper {
         try {
             Msg msg = new Msg();
             msg.setId(getInt(getColumnIndexOrThrow(MsgTable.Cols.ID)));
-            if (getColumnIndex(MsgTable.Cols.COID) > -1) {
-                if (!isNull(getColumnIndex(MsgTable.Cols.COID))) {
-                    msg.setMSCOID(getInt(getColumnIndex(MsgTable.Cols.COID)));
+            if (getColumnIndex(MsgTable.Cols.COPUBLICID) > -1) {
+                if (!isNull(getColumnIndex(MsgTable.Cols.COPUBLICID))) {
+                    msg.setMSCOPublicId(getInt(getColumnIndex(MsgTable.Cols.COPUBLICID)));
                 }
             }
             if (getColumnIndex(MsgTable.Cols.TOID) > -1) {
                 if (!isNull(getColumnIndex(MsgTable.Cols.TOID))) {
-                    msg.setMSToID(getInt(getColumnIndex(MsgTable.Cols.TOID)));
+                    msg.setMSToId(getInt(getColumnIndex(MsgTable.Cols.TOID)));
                 }
             }
             if (getColumnIndex(MsgTable.Cols.FROMID) > -1) {
                 if (!isNull(getColumnIndex(MsgTable.Cols.FROMID))) {
-                    msg.setMSFromID(getInt(getColumnIndex(MsgTable.Cols.FROMID)));
+                    msg.setMSFromId(getInt(getColumnIndex(MsgTable.Cols.FROMID)));
                 }
             }
             if (getColumnIndex(MsgTable.Cols.BODY) > -1) {
@@ -57,7 +57,7 @@ public class MsgCursorWrapper extends CursorWrapper {
             }
             if (getColumnIndex(MsgTable.Cols.RESULT) > -1) {
                 if (!isNull(getColumnIndex(MsgTable.Cols.RESULT))) {
-                    msg.setMSResult(getString(getColumnIndex(MsgTable.Cols.RESULT)));
+                    msg.setMSResult(getInt(getColumnIndex(MsgTable.Cols.RESULT)));
                 }
             }
             return msg;

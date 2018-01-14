@@ -1,4 +1,4 @@
-package com.jraw.android.jonsapp.utils;
+package com.jraw.android.jonsapp.utils.schedulers;
 
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;

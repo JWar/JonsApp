@@ -1,10 +1,10 @@
 package com.jraw.android.jonsapp.ui.conversation;
 
 import android.support.annotation.NonNull;
-import com.jraw.android.jonsapp.data.model.Conversation;
+
 import com.jraw.android.jonsapp.data.model.entity;
 import com.jraw.android.jonsapp.data.repositories.ConversationRepository;
-import com.jraw.android.jonsapp.utils.BaseSchedulerProvider;
+import com.jraw.android.jonsapp.utils.schedulers.BaseSchedulerProvider;
 import com.jraw.android.jonsapp.utils.Utils;
 
 import java.util.List;
@@ -39,6 +39,7 @@ public class ConversationPresenter implements ConversationContract.PresenterConv
         mConversationRepository = checkNotNull(aConversationRepository);
         mBaseSchedulerProvider = checkNotNull(aBaseSchedulerProvider);
         mViewConversations = checkNotNull(aViewConversations);
+        mViewConversations.setPresenter(this);
         mDisposables = new CompositeDisposable();
     }
 

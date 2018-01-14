@@ -1,6 +1,6 @@
 package com.jraw.android.jonsapp.data.source.local;
 
-import com.jraw.android.jonsapp.DummyData;
+import com.jraw.android.jonsapp.utils.DummyData;
 import com.jraw.android.jonsapp.data.model.Conversation;
 import com.jraw.android.jonsapp.data.model.entity;
 import com.jraw.android.jonsapp.data.source.ConversationDataSource;

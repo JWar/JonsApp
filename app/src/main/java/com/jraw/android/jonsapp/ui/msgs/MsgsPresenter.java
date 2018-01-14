@@ -4,7 +4,7 @@ import android.support.annotation.NonNull;
 
 import com.jraw.android.jonsapp.data.model.entity;
 import com.jraw.android.jonsapp.data.repositories.MsgRepository;
-import com.jraw.android.jonsapp.utils.BaseSchedulerProvider;
+import com.jraw.android.jonsapp.utils.schedulers.BaseSchedulerProvider;
 import com.jraw.android.jonsapp.utils.Utils;
 
 import java.util.List;
@@ -39,6 +39,7 @@ public class MsgsPresenter implements MsgsContract.PresenterMsgs {
         mMsgRepository = checkNotNull(aMsgRepository);
         mBaseSchedulerProvider = checkNotNull(aBaseSchedulerProvider);
         mViewMsgs = checkNotNull(aViewMsgs);
+        mViewMsgs.setPresenter(this);
         mDisposables = new CompositeDisposable();
     }
 
