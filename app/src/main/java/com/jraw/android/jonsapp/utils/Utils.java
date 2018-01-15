@@ -11,6 +11,9 @@ import static com.jraw.android.jonsapp.MainActivity.LOG_TAG;
 import static com.jraw.android.jonsapp.MainActivity.LOG_DEBUG;
 
 public class Utils {
+    //Quick and dirty way of assigning ids for different users. Mostly used in DummyData...
+    //Will use shared preferences for this user!
+    public static final String USER_ID = "userId";
 
     public static final int USER_A=1;
     public static final int USER_B=2;

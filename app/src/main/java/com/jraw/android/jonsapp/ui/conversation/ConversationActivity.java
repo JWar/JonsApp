@@ -1,5 +1,6 @@
 package com.jraw.android.jonsapp.ui.conversation;
 
+import android.content.SharedPreferences;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -11,6 +12,8 @@ import com.jraw.android.jonsapp.Injection;
 import com.jraw.android.jonsapp.R;
 import com.jraw.android.jonsapp.utils.Utils;
 
+import static com.jraw.android.jonsapp.utils.Utils.USER_ID;
+
 public class ConversationActivity extends AppCompatActivity {
 
     private ConversationPresenter mConversationPresenter;
@@ -18,6 +21,13 @@ public class ConversationActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //First things first is check for installation! I.e is this the first time JonsApp has been run?
+        //Basic way is check Shared Preferences for a user id...
+        SharedPreferences sharedPreferences = getPreferences(0);
+        if (sharedPreferences.getInt(USER_ID,0)==0) {//If its default value then installation NOT happened.
+            //Run installation routine!
+        }
+
         setContentView(R.layout.activity_conversations);
         Toolbar toolbar = findViewById(R.id.conversations_toolbar);
         setSupportActionBar(toolbar);
