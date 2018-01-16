@@ -1,5 +1,6 @@
 package com.jraw.android.jonsapp.data.source;
 
+import com.jraw.android.jonsapp.data.model.Msg;
 import com.jraw.android.jonsapp.data.model.entity;
 import java.util.List;
 import io.reactivex.Observable;
@@ -14,4 +15,6 @@ import io.reactivex.Observable;
 public interface MsgDataSource {
     Observable<List<entity>> getMsgs(int aCOId);
     Observable<List<entity>> getMsgsViaBody(int aCOId, String aBody);
+    //Hmm will this need a return id? Put it in anyway just in case
+    long saveMsg(Msg aMsg);
 }

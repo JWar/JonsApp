@@ -5,6 +5,7 @@ import com.jraw.android.jonsapp.data.model.entity;
 import com.jraw.android.jonsapp.data.repositories.MsgRepository;
 import com.jraw.android.jonsapp.data.source.MsgDataSource;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
@@ -43,6 +44,10 @@ public class MsgRepositoryTest {
         mEntities = new ArrayList<>();//Dont think need any data in it.. as long as its the same memory address :)
         mCOId = 1;
         mTestObserver = new TestObserver<>();
+    }
+    @After
+    public void ripDown() {
+        mMsgRepository.destroyInstance();
     }
 
     @Test

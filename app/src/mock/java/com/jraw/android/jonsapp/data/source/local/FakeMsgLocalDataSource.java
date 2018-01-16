@@ -47,4 +47,12 @@ public class FakeMsgLocalDataSource implements MsgDataSource {
         }
         return Observable.just(dataToReturn);
     }
+
+    @Override
+    public long saveMsg(Msg aMsg) {
+        int id = mFakeData.size();//This assumes ids are incremented in order but tis DummyData so meh!
+        aMsg.setId(id);
+        mFakeData.add(aMsg);
+        return id;
+    }
 }

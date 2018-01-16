@@ -1,6 +1,8 @@
 package com.jraw.android.jonsapp.data.source.local;
 
 import android.support.annotation.NonNull;
+
+import com.jraw.android.jonsapp.data.model.Msg;
 import com.jraw.android.jonsapp.data.model.entity;
 import com.jraw.android.jonsapp.data.model.wrappers.MsgCursorWrapper;
 import com.jraw.android.jonsapp.data.source.MsgDataSource;
@@ -77,5 +79,11 @@ public class MsgLocalDataSource implements MsgDataSource {
                         return entList;
                     }
                 });
+    }
+
+    @Override
+    public long saveMsg(Msg aMsg) {
+        return mBriteWrapper.insert(MsgTable.NAME,
+                aMsg.toCV());
     }
 }

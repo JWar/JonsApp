@@ -5,6 +5,7 @@ import com.jraw.android.jonsapp.data.model.entity;
 import com.jraw.android.jonsapp.data.repositories.ConversationRepository;
 import com.jraw.android.jonsapp.data.source.ConversationDataSource;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
@@ -42,6 +43,10 @@ public class ConversationRepositoryTest {
         mConversationRepository = ConversationRepository.getInstance(mConversationLocalDataSource);
         mEntities = new ArrayList<>();//Dont think need any data in it.. as long as its the same memory address :)
         mTestObserver = new TestObserver<>();
+    }
+    @After
+    public void ripDown() {
+        mConversationRepository.destroyInstance();
     }
 
     @Test

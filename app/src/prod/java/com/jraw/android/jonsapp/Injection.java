@@ -14,9 +14,9 @@ import com.jraw.android.jonsapp.data.source.local.MsgLocalDataSource;
 import com.jraw.android.jonsapp.database.BriteWrapper;
 import com.jraw.android.jonsapp.database.DbHelper;
 import com.jraw.android.jonsapp.data.source.remote.JonsAppApi;
-import com.jraw.android.jonsapp.utils.BaseSchedulerProvider;
+import com.jraw.android.jonsapp.utils.schedulers.BaseSchedulerProvider;
 import com.jraw.android.jonsapp.utils.DoubleTypeAdapter;
-import com.jraw.android.jonsapp.utils.SchedulerProvider;
+import com.jraw.android.jonsapp.utils.schedulers.SchedulerProvider;
 import com.squareup.sqlbrite2.SqlBrite;
 
 import retrofit2.Retrofit;

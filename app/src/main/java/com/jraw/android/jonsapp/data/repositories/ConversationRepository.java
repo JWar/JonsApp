@@ -34,7 +34,9 @@ public class ConversationRepository {
     private ConversationRepository(@NonNull ConversationDataSource aConversationDataSource) {
         mConversationDataSource = checkNotNull(aConversationDataSource);
     }
-
+    public void destroyInstance() {
+        sInstance=null;
+    }
     public Observable<List<entity>> getConversations() {
         return mConversationDataSource.getConversations();
     }

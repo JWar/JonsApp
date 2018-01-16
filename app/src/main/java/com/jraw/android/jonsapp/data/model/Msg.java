@@ -1,5 +1,8 @@
 package com.jraw.android.jonsapp.data.model;
 
+import android.content.ContentValues;
+
+import com.jraw.android.jonsapp.database.DbSchema.MsgTable;
 import com.jraw.android.jonsapp.utils.Utils;
 import org.json.JSONObject;
 
@@ -115,5 +118,36 @@ public class Msg extends entity {
     }
     public int getMSResult() {
         return MSResult;
+    }
+
+    //Returns this Msg as a ContentValues object
+    public ContentValues toCV() {
+        ContentValues cV = new ContentValues();
+        cV.put(MsgTable.Cols.ID,getId());
+        if (MSCOPublicId!=0) {
+            cV.put(MsgTable.Cols.COPUBLICID,MSCOPublicId);
+        }
+        if (MSToId!=0) {
+            cV.put(MsgTable.Cols.TOID,MSToId);
+        }
+        if (MSFromId!=0) {
+            cV.put(MsgTable.Cols.FROMID,MSFromId);
+        }
+        if (MSBody!=null) {
+            cV.put(MsgTable.Cols.BODY,MSBody);
+        }
+        if (MSEventDate!=null) {
+            cV.put(MsgTable.Cols.EVENTDATE,MSEventDate);
+        }
+        if (MSType!=0) {
+            cV.put(MsgTable.Cols.TYPE,MSType);
+        }
+        if (MSData!=null) {
+            cV.put(MsgTable.Cols.DATA,MSData);
+        }
+        if (MSResult!=0) {
+            cV.put(MsgTable.Cols.RESULT,MSResult);
+        }
+        return cV;
     }
 }
