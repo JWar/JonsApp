@@ -1,14 +1,22 @@
 package com.jraw.android.jonsapp;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
 import com.jraw.android.jonsapp.data.repositories.ConversationRepository;
 import com.jraw.android.jonsapp.data.repositories.MsgRepository;
+import com.jraw.android.jonsapp.data.source.ConversationDataSource;
+import com.jraw.android.jonsapp.data.source.MsgDataSource;
+import com.jraw.android.jonsapp.data.source.local.ConversationLocalDataSource;
 import com.jraw.android.jonsapp.data.source.local.FakeConversationLocalDataSource;
 import com.jraw.android.jonsapp.data.source.local.FakeMsgLocalDataSource;
+import com.jraw.android.jonsapp.data.source.local.MsgLocalDataSource;
+import com.jraw.android.jonsapp.database.BriteWrapper;
+import com.jraw.android.jonsapp.database.DbHelper;
 import com.jraw.android.jonsapp.utils.schedulers.BaseSchedulerProvider;
 import com.jraw.android.jonsapp.utils.schedulers.SchedulerProvider;
+import com.squareup.sqlbrite2.SqlBrite;
 
 /**
  * Created by JonGaming on 03/01/2018.
@@ -27,7 +35,19 @@ public class Injection {
     public static MsgRepository provideMsgRepository(@Nullable Context aContext) {
         return MsgRepository.getInstance(FakeMsgLocalDataSource.getInstance());
     }
-    public static BaseSchedulerProvider provideBaseSchedulerProvider() {
+    public static BaseSchedulerProvider provideSchedulerProvider() {
         return SchedulerProvider.getInstance();
+    }
+    public static BriteWrapper provideBriteWrapper(@NonNull Context aContext) throws Exception {
+        return BriteWrapper.getInstance(
+                new SqlBrite.Builder().build().wrapDatabaseHelper(
+                        new DbHelper(aContext.getApplicationContext(),DbHelper.DATABASE_NAME,null,DbHelper.VERSION),
+                        Injection.provideSchedulerProvider().io()));
+    }
+    public static ConversationDataSource provideConversationDataSource(@NonNull Context aContext) throws Exception {
+        return ConversationLocalDataSource.getInstance(provideBriteWrapper(aContext));
+    }
+    public static MsgDataSource provideMsgDataSource(@NonNull Context aContext) throws Exception {
+        return MsgLocalDataSource.getInstance(provideBriteWrapper(aContext));
     }
 }

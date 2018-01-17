@@ -48,7 +48,7 @@ public class Injection {
     public static BriteWrapper provideBriteWrapper(@NonNull Context aContext) throws Exception {
         return BriteWrapper.getInstance(
                 new SqlBrite.Builder().build().wrapDatabaseHelper(
-                        new DbHelper(aContext,DbHelper.DATABASE_NAME,null,DbHelper.VERSION),
+                        new DbHelper(aContext.getApplicationContext(),DbHelper.DATABASE_NAME,null,DbHelper.VERSION),
                         Injection.provideSchedulerProvider().io()));
     }
     public static SchedulerProvider provideSchedulerProvider() throws Exception {

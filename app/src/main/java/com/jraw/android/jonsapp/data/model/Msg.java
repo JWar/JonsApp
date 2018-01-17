@@ -2,6 +2,7 @@ package com.jraw.android.jonsapp.data.model;
 
 import android.content.ContentValues;
 
+import com.google.gson.annotations.SerializedName;
 import com.jraw.android.jonsapp.database.DbSchema.MsgTable;
 import com.jraw.android.jonsapp.utils.Utils;
 import org.json.JSONObject;
@@ -21,54 +22,31 @@ public class Msg extends entity {
         SENT, DELIVERED, READ, FAILED
     }
     //Which conversation this msg is part of, uses public id...
+    @SerializedName("copublicid")
     private int MSCOPublicId = 0;
     //Supposed to be the ID this msg is to but redundant given the way COID handles everything
+    @SerializedName("toid")
     private int MSToId = 0;
     //See MSToID above, although knowing who the msg is from is necessary. Remove toId?
+    @SerializedName("fromid")
     private int MSFromId = 0;
     //Content of Msg
+    @SerializedName("body")
     private String MSBody;
     //Msg date
+    @SerializedName("eventdate")
     private String MSEventDate;
     //Type of msg? Text,image,video?
+    @SerializedName("type")
     private int MSType = 0;
     //Data?? Presumably if this msg has image or video
+    @SerializedName("data")
     private String MSData;
     //Read,sent,delivered etc...
+    @SerializedName("result")
     private int MSResult;
 
     public Msg() {}
-
-    public Msg(JSONObject aObj) {
-        try {
-            if (aObj.has("coid")) {
-                setMSCOPublicId(aObj.getInt("coid"));
-            }
-            if (aObj.has("toid")) {
-                setMSToId(aObj.getInt("toid"));
-            }
-            if (aObj.has("fromid")) {
-                setMSFromId(aObj.getInt("fromid"));
-            }
-            if (aObj.has("body")) {
-                setMSBody(aObj.getString("body"));
-            }
-            if (aObj.has("eventdate")) {
-                setMSEventDate(aObj.getString("eventdate"));
-            }
-            if (aObj.has("type")) {
-                setMSType(aObj.getInt("type"));
-            }
-            if (aObj.has("data")) {
-                setMSData(aObj.getString("data"));
-            }
-            if (aObj.has("result")) {
-                setMSResult(aObj.getInt("result"));
-            }
-        } catch (Exception e) {
-            Utils.logDebug("Error in Msg constructor: "+e.getMessage());
-        }
-    }
 
     public void setMSCOPublicId(int aInt) {
         MSCOPublicId = aInt;
