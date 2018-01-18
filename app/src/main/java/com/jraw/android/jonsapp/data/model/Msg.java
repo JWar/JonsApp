@@ -4,12 +4,12 @@ import android.content.ContentValues;
 
 import com.google.gson.annotations.SerializedName;
 import com.jraw.android.jonsapp.database.DbSchema.MsgTable;
-import com.jraw.android.jonsapp.utils.Utils;
-import org.json.JSONObject;
 
 /**
  * Created by JonGaming on 17/07/2017.
- *
+ * TODO:180118_Hmm it seems there is no way to verify, in Firebase, whether a Msg has been sent successfully to the device.
+ * The 200 status simply says if there is a successful match with the tokens, basically saying if the Msg CAN be sent...
+ * Would have to rig up a response from the device itself to confirm Msg has been received...
  */
 
 public class Msg extends entity {

@@ -33,11 +33,11 @@ public class MsgsHolder extends AbstractHolder {
     public MsgsHolder(View view) {
         super(view);
         mView = view;
-        mBodyRL = (RelativeLayout) view.findViewById(R.id.list_item_msgs_body_rl);
-        mTimeRL = (RelativeLayout) view.findViewById(R.id.list_item_msgs_time_rl);
-        mDateTV = (TextView) view.findViewById(R.id.list_item_msgs_time);
-        mNameTV = (TextView) view.findViewById(R.id.list_item_msgs_name);
-        mBodyTV = (TextView) view.findViewById(R.id.list_item_msgs_text_view);
+        mBodyRL = view.findViewById(R.id.list_item_msgs_body_rl);
+        mTimeRL = view.findViewById(R.id.list_item_msgs_time_rl);
+        mDateTV = view.findViewById(R.id.list_item_msgs_time);
+        mNameTV = view.findViewById(R.id.list_item_msgs_name);
+        mBodyTV = view.findViewById(R.id.list_item_msgs_text_view);
     }
 
     private void setTimeToEnd() {
@@ -51,7 +51,7 @@ public class MsgsHolder extends AbstractHolder {
         lp = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT,
                 RelativeLayout.LayoutParams.WRAP_CONTENT);
         lp.setMargins(2, 24, 2, 4);
-        lp.addRule(RelativeLayout.START_OF, R.id.list_item_msgs_time_rl);
+        lp.addRule(RelativeLayout.END_OF, R.id.list_item_msgs_time_rl);
         mBodyRL.setLayoutParams(lp);
     }
 
@@ -60,62 +60,45 @@ public class MsgsHolder extends AbstractHolder {
         mBodyTV.setPaddingRelative(76, 4, 20, 4);
         RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT,
                 RelativeLayout.LayoutParams.WRAP_CONTENT);
-        if (Build.VERSION.SDK_INT < 17) {
-            lp.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
-        } else {
-            lp.addRule(RelativeLayout.ALIGN_PARENT_START);
-        }
+        lp.addRule(RelativeLayout.ALIGN_PARENT_START);
         lp.setMargins(4, 24, 2, 4);
         mTimeRL.setLayoutParams(lp);
         lp = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT,
                 RelativeLayout.LayoutParams.WRAP_CONTENT);
         lp.setMargins(2, 24, 2, 4);
-        if (Build.VERSION.SDK_INT < 17) {
-            lp.addRule(RelativeLayout.RIGHT_OF, R.id.list_item_msgs_time_rl);
-        } else {
-            lp.addRule(RelativeLayout.END_OF, R.id.list_item_msgs_time_rl);
-        }
+        lp.addRule(RelativeLayout.START_OF, R.id.list_item_msgs_time_rl);
         mBodyRL.setLayoutParams(lp);
 //        mNameTV.setX(60);
 //        mBodyTV.setX(60);
     }
 
     private String setViews(Msg aMsg, int aPos) {
+        String toDisplay=aMsg.getMSEventDate();
+        mDateTV.setText(toDisplay);
+        if (aMsg.getMSFromId()==Utils.THIS_USER_ID) {//If msg is from this user
+            if (Build.VERSION.SDK_INT<Build.VERSION_CODES.LOLLIPOP) {
+                mBodyRL.setBackground(mView.getResources().getDrawable(
+                        R.drawable.bg_outgoing_bubble
+                ));
+            } else {
+                mBodyRL.setBackground(mView.getResources().getDrawable(
+                        R.drawable.bg_outgoing_bubble,null
+                ));
+            }
+            setTimeToEnd();
+        } else {
+            if (Build.VERSION.SDK_INT<Build.VERSION_CODES.LOLLIPOP) {
+                mBodyRL.setBackground(mView.getResources().getDrawable(
+                        R.drawable.bg_incoming_bubble
+                ));
+            } else {
+                mBodyRL.setBackground(mView.getResources().getDrawable(
+                        R.drawable.bg_incoming_bubble,null
+                ));
+            }
+            setTimeToStart();
+        }
         mBodyTV.setText(aMsg.getMSBody());
-//        String toDisplay=aAct.getACEventDate();
-//        mDateTV.setText(toDisplay);
-//        switch (aAct.getACType()) {
-//
-//            case SgTxnEngine.ACTIVITY_TYPE_TEL_OUT:
-//
-//                if (Build.VERSION.SDK_INT<Build.VERSION_CODES.LOLLIPOP) {
-//                    mBodyRL.setBackground(mView.getResources().getDrawable(
-//                            R.drawable.bg_outgoing_bubble
-//                    ));
-//                } else {
-//                    mBodyRL.setBackground(mView.getResources().getDrawable(
-//                            R.drawable.bg_outgoing_bubble,null
-//                    ));
-//                }
-//                setTimeToEnd();
-//                break;
-//            case SgTxnEngine.ACTIVITY_TYPE_TEL:
-//
-//                if (Build.VERSION.SDK_INT<Build.VERSION_CODES.LOLLIPOP) {
-//                    mBodyRL.setBackground(mView.getResources().getDrawable(
-//                            R.drawable.bg_incoming_bubble
-//                    ));
-//                } else {
-//                    mBodyRL.setBackground(mView.getResources().getDrawable(
-//                            R.drawable.bg_incoming_bubble,null
-//                    ));
-//                }
-//                setTimeToStart();
-//                break;
-//        }
-//        mBodyTV.setText(aAct.getACBody());
-//
-//        return aAct.getId()+"";
         return aMsg.getId()+"";
     }
 

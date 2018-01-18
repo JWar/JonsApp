@@ -42,7 +42,6 @@ public class MsgsActivity extends AppCompatActivity {
                         .add(R.id.msgs_list_fragment_container,fragment,MsgsFragment.TAG)
                         .commit();
             }
-            //Hmm this is where the database gets init... the Presenter inits the Repo inits LocalDataSource which inits DB.
             mMsgsPresenter = new MsgsPresenter(Injection.provideMsgRepository(this),
                     Injection.provideBaseSchedulerProvider(),
                     fragment);

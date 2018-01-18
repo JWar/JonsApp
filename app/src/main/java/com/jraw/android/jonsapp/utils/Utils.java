@@ -11,9 +11,13 @@ import static com.jraw.android.jonsapp.MainActivity.LOG_TAG;
 import static com.jraw.android.jonsapp.MainActivity.LOG_DEBUG;
 
 public class Utils {
+
+    public static final String CHANNEL_ID = "newmsg";
     //Quick and dirty way of assigning ids for different users. Mostly used in DummyData...
     //Will use shared preferences for this user!
     public static final String USER_ID = "userId";
+    //This will be inited from SharedPreferences in real versions
+    public static final int THIS_USER_ID=1;
 
     public static final int USER_A=1;
     public static final int USER_B=2;

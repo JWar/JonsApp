@@ -24,6 +24,8 @@
     <string name="new_conversation_button_cd">Add contact</string>
     <string name="new_conversation_contacts_title">"Contacts added: "</string>
 
+    <string name="notification_new_msg_received">New Message!</string>
 
+    <string name="send_msg">Send</string>
 
 </resources>

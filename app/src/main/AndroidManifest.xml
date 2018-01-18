@@ -34,6 +34,9 @@
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
 
+        <activity android:name=".ui.newconversation.NewConversationActivity">
+        </activity>
+
         <service
             android:name=".firebaseservice.FirebaseMsgService"
             android:enabled="true"
@@ -43,11 +46,7 @@
             </intent-filter>
         </service>
         <service android:name=".firebaseservice.InstanceIdService">
-
         </service>
-
-        <activity android:name=".ui.newconversation.NewConversationActivity">
-        </activity>
     </application>
 
 </manifest>
