@@ -22,7 +22,7 @@
     </android.support.design.widget.AppBarLayout>
 
     <FrameLayout
-        android:id="@+id/conversations_list_fragment_container"
+        android:id="@+id/conversations_fragment_container"
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent">

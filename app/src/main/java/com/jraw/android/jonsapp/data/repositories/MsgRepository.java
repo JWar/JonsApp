@@ -52,7 +52,7 @@ public class MsgRepository {
     public static synchronized MsgRepository get(Context aContext) {
         try {
             if (sInstance == null) {
-                sInstance = new MsgRepository(MsgLocalDataSource.getInstance(Injection.provideBriteWrapper(aContext)));
+                sInstance = new MsgRepository(MsgLocalDataSource.getInstance(Injection.provideBriteWrapper(aContext.getApplicationContext())));
             }
             return sInstance;
         } catch (Exception e) {Utils.logDebug("Error in MsgRepository.get: "+e.getLocalizedMessage());return null;}
