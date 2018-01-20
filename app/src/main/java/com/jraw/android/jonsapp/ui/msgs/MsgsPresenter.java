@@ -46,7 +46,7 @@ public class MsgsPresenter implements MsgsContract.PresenterMsgs {
     @Override
     public void getMsgs(int aCOId) {
         Disposable disposable = mMsgRepository.getMsgs(aCOId)
-                                    //TODO:180105_<-- do I need to 'subscribeOn'? Isnt Brite automatically using alt thread??
+                                    //180105_<-- do I need to 'subscribeOn'? Isnt Brite automatically using alt thread??
                 .observeOn(mBaseSchedulerProvider.ui())//<-- means whatever results we get are processed on ui thread (in the subscribe's consumer)
                 .subscribe(new Consumer<List<entity>>() {
                     @Override
@@ -66,7 +66,7 @@ public class MsgsPresenter implements MsgsContract.PresenterMsgs {
     public void getMsgsViaBody(int aCOId,
                                String aText) {
         Disposable disposable = mMsgRepository.getMsgsViaBody(aCOId, aText)
-                                    //TODO:180105_<-- do I need to 'subscribeOn'? Isnt Brite automatically using alt thread??
+                                    //180105_<-- do I need to 'subscribeOn'? Isnt Brite automatically using alt thread??
                 .observeOn(mBaseSchedulerProvider.ui())//<-- means whatever results we get are processed on ui thread (in the subscribe's consumer)
                 .subscribe(new Consumer<List<entity>>() {
                     @Override

@@ -35,7 +35,7 @@ public class ListRecyclerViewAdapter extends RecyclerView.Adapter<AbstractHolder
     private List<entity> mList;
 //    private List<Conversation> mConversations;
 //    private List<Msg> mMsgs;
-    private List<List<entity>> mXList;
+//    private List<List<entity>> mXList;
 
     public ListRecyclerViewAdapter(ListHandlerCallback listener, int type) {
         mListener = listener;
@@ -98,15 +98,14 @@ public class ListRecyclerViewAdapter extends RecyclerView.Adapter<AbstractHolder
     @Override
     public long getItemId(int aPos) {
         try {
-            mCursor.moveToPosition(aPos);
-            return mCursor.getLong(mCursor.getInt(0));
+            return mList.get(aPos).getId();
         } catch (Exception e) {Utils.logDebug("Error in ListAdapter.getItemId: " + e.getMessage());return -1;}
     }
     @Override
     public int getItemCount() {
         try {
-            if (mCursor != null) {
-                return mCursor.getCount();
+            if (mList!= null) {
+                return mList.size();
             } else {
                 return -1;
             }

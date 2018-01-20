@@ -43,7 +43,7 @@ public class MsgsActivity extends AppCompatActivity {
                         .commit();
             }
             mMsgsPresenter = new MsgsPresenter(Injection.provideMsgRepository(this),
-                    Injection.provideBaseSchedulerProvider(),
+                    Injection.provideSchedulerProvider(),
                     fragment);
         } catch (Exception e) {
             Utils.logDebug("Error in MsgsActivity.onCreate: "+e.getLocalizedMessage());}
@@ -53,5 +53,15 @@ public class MsgsActivity extends AppCompatActivity {
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putInt(CO_ID,mCOId);
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        if (getSupportFragmentManager().getBackStackEntryCount()<2){
+            finish();
+        } else {
+            super.onBackPressed();
+        }
     }
 }

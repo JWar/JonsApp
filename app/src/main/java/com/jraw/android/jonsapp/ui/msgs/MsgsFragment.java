@@ -32,7 +32,8 @@ import java.util.List;
  * allows for communication between host and SearchBar. Its basically a View so resides in View part.
  */
 public class MsgsFragment extends Fragment implements MsgsContract.ViewMsgs,
-        SearchBarContract.SearchBarHost {
+        SearchBarContract.SearchBarHost,
+        ListHandler.ListHandlerContract {
 
     public static final String TAG = "msgsFragTag";
     private static final String CO_ID = "coId";
@@ -145,5 +146,11 @@ public class MsgsFragment extends Fragment implements MsgsContract.ViewMsgs,
     public void onDestroy() {
         super.onDestroy();
         clear();
+        clearListHandler();
+    }
+
+    @Override
+    public void clearListHandler() {
+        mListHandler.clearListHandler();
     }
 }

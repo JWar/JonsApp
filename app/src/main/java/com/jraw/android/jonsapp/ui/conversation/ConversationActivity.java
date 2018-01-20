@@ -31,18 +31,18 @@ public class ConversationActivity extends AppCompatActivity {
 
             //First things first is check for installation! I.e is this the first time JonsApp has been run?
             //Basic way is check Shared Preferences for a user id...
-            SharedPreferences sharedPreferences = getPreferences(0);
-            if (sharedPreferences.getInt(USER_ID,0)==0) {//If its default value then installation needed.
-                //Run installation routine!
-                InstallFragment installFragment = new InstallFragment();
-                getSupportFragmentManager()
-                        .beginTransaction()
-                        .addToBackStack(InstallFragment.TAG)
-                        .add(R.id.conversations_fragment_container,installFragment,InstallFragment.TAG)
-                        .commit();
-                mInstallPresenter = new InstallPresenter(installFragment);
-                return;
-            }
+//            SharedPreferences sharedPreferences = getPreferences(0);
+//            if (sharedPreferences.getInt(USER_ID,0)==0) {//If its default value then installation needed.
+//                //Run installation routine!
+//                InstallFragment installFragment = new InstallFragment();
+//                getSupportFragmentManager()
+//                        .beginTransaction()
+//                        .addToBackStack(InstallFragment.TAG)
+//                        .add(R.id.conversations_fragment_container,installFragment,InstallFragment.TAG)
+//                        .commit();
+//                mInstallPresenter = new InstallPresenter(installFragment);
+//                return;
+//            }
 
             //Need to extend this to handle onInstall...
             //Need to think about fragments interaction. Think its simple enough at the moment
@@ -58,11 +58,11 @@ public class ConversationActivity extends AppCompatActivity {
                         .commit();
                 //Hmm this is where the database gets init... the Presenter inits the Repo inits LocalDataSource which inits DB.
                 mConversationPresenter = new ConversationPresenter(Injection.provideConversationRepository(this),
-                        Injection.provideBaseSchedulerProvider(),
+                        Injection.provideSchedulerProvider(),
                         conversationFragment);
             } else if (fragment instanceof ConversationFragment) {
                 mConversationPresenter = new ConversationPresenter(Injection.provideConversationRepository(this),
-                        Injection.provideBaseSchedulerProvider(),
+                        Injection.provideSchedulerProvider(),
                         (ConversationFragment) fragment);
             } else if (fragment instanceof InstallFragment) {
                 mInstallPresenter = new InstallPresenter((InstallFragment)fragment);
@@ -72,23 +72,12 @@ public class ConversationActivity extends AppCompatActivity {
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.action_settings:
-                //Settings activity
-                return true;
-            case R.id.action_new_conversation:
-                //New conversation activity?
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
+    public void onBackPressed() {
+        super.onBackPressed();
+        if (getSupportFragmentManager().getBackStackEntryCount()<2){
+            finish();
+        } else {
+            super.onBackPressed();
         }
     }
 }

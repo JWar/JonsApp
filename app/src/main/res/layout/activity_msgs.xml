@@ -4,9 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
     tools:context="com.jraw.android.jonsapp.ui.msgs.MsgsActivity">
-
-    <!--TODO: implement custom actionbar-->
 
     <FrameLayout
         android:id="@+id/msgs_list_fragment_container"

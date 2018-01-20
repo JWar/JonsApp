@@ -33,7 +33,8 @@ import java.util.List;
  * What about SearchViewQuerying? This will require options menu blah blah then setting the OnQueryHandler
  * as mPresenters getConverationsViaTitle
  */
-public class ConversationFragment extends Fragment implements ConversationContract.ViewConversations {
+public class ConversationFragment extends Fragment implements ConversationContract.ViewConversations,
+        ListHandler.ListHandlerContract {
 
     public static final String TAG = "conversationFragTag";
 
@@ -124,7 +125,19 @@ public class ConversationFragment extends Fragment implements ConversationContra
                     return true;
                 }
             });
+            //TODO: 180120_This is where you set the onClickListeners for the buttons in SearchBar
         }
         super.onPrepareOptionsMenu(menu);
+    }
+
+    @Override
+    public void clearListHandler() {
+        mListHandler.clearListHandler();
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        clearListHandler();
     }
 }

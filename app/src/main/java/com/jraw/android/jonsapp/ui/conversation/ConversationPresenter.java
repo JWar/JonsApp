@@ -47,7 +47,7 @@ public class ConversationPresenter implements ConversationContract.PresenterConv
     public void getConversations() {
         Disposable disposable = mConversationRepository
                 .getConversations()
-                                    //TODO:180105_<-- do I need to 'subscribeOn'? Isnt Brite automatically using alt thread??
+                                    //180105_<-- do I need to 'subscribeOn'? Isnt Brite automatically using alt thread??
                 .observeOn(mBaseSchedulerProvider.ui())//<-- means whatever results we get are processed on ui thread
                 .subscribe(new Consumer<List<entity>>() {
                     @Override
@@ -67,7 +67,7 @@ public class ConversationPresenter implements ConversationContract.PresenterConv
     public void getConversationsViaTitle(String aTitle) {
         Disposable disposable = mConversationRepository
                 .getConversationsViaTitle(aTitle)
-                                    //TODO:180105_<-- do I need to 'subscribeOn'? Isnt Brite automatically using alt thread??
+                                    //180105_<-- do I need to 'subscribeOn'? Isnt Brite automatically using alt thread??
                 .observeOn(mBaseSchedulerProvider.ui())//<-- means whatever results we get are processed on ui thread
                 .subscribe(new Consumer<List<entity>>() {
                     @Override

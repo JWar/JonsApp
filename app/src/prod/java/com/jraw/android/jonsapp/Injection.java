@@ -42,7 +42,7 @@ public class Injection {
     public static MsgDataSource provideMsgDataSource(@NonNull Context aContext) throws Exception {
         return MsgLocalDataSource.getInstance(provideBriteWrapper(aContext));
     }
-    public static BaseSchedulerProvider provideBaseSchedulerProvider() throws Exception {
+    public static BaseSchedulerProvider provideSchedulerProvider() throws Exception {
         return SchedulerProvider.getInstance();
     }
     public static BriteWrapper provideBriteWrapper(@NonNull Context aContext) throws Exception {
@@ -50,9 +50,6 @@ public class Injection {
                 new SqlBrite.Builder().build().wrapDatabaseHelper(
                         new DbHelper(aContext.getApplicationContext(),DbHelper.DATABASE_NAME,null,DbHelper.VERSION),
                         Injection.provideSchedulerProvider().io()));
-    }
-    public static SchedulerProvider provideSchedulerProvider() throws Exception {
-        return SchedulerProvider.getInstance();
     }
     public static JonsAppApi provideJonsAppApi() throws Exception {
         Retrofit retrofit = new Retrofit.Builder()
