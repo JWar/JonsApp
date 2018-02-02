@@ -1,5 +1,9 @@
 package com.jraw.android.jonsapp.data.model;
 
+import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.ForeignKey;
+import android.arch.persistence.room.Index;
+
 import com.jraw.android.jonsapp.utils.Utils;
 import org.json.JSONObject;
 
@@ -7,7 +11,14 @@ import org.json.JSONObject;
  * Created by JonGaming on 17/07/2017.
  *
  */
-
+@Entity(tableName = "tel",
+        foreignKeys = @ForeignKey(
+        entity = PeTel.class,
+        childColumns = "id",
+        parentColumns = "PTTelId",
+        onDelete = ForeignKey.CASCADE),
+        indices = {@Index(value = {"TENumber"},
+        unique = true)})
 public class Tel extends entity {
     private String TENumber;
 

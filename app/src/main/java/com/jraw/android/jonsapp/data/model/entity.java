@@ -1,11 +1,13 @@
 package com.jraw.android.jonsapp.data.model;
 
+import android.arch.persistence.room.PrimaryKey;
+
 /**
  * Created by JonGaming on 29/06/2017.
  *
  */
-
 public class entity {
+    @PrimaryKey(autoGenerate = true)
     private int id = 0;
 
     public entity() {

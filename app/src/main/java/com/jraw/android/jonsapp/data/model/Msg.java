@@ -1,5 +1,7 @@
 package com.jraw.android.jonsapp.data.model;
 
+import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.ForeignKey;
 import android.content.ContentValues;
 
 import com.google.gson.annotations.SerializedName;
@@ -11,7 +13,11 @@ import com.jraw.android.jonsapp.database.DbSchema.MsgTable;
  * The 200 status simply says if there is a successful match with the tokens, basically saying if the Msg CAN be sent...
  * Would have to rig up a response from the device itself to confirm Msg has been received...
  */
-
+@Entity(tableName = "msg", foreignKeys = @ForeignKey(
+                entity = Conversation.class,
+                childColumns = "MSCOPublicId",
+                parentColumns = "COPublicId",
+                onDelete = ForeignKey.CASCADE))
 public class Msg extends entity {
 
     public enum MSG_TYPES {
@@ -40,8 +46,9 @@ public class Msg extends entity {
     @SerializedName("type")
     private int MSType = 0;
     //Data?? Presumably if this msg has image or video
+    //Im assuming it will be the uri...
     @SerializedName("data")
-    private String MSData;
+    private byte[] MSData;
     //Read,sent,delivered etc...
     @SerializedName("result")
     private int MSResult;
@@ -66,9 +73,7 @@ public class Msg extends entity {
     public void setMSType(int aInt) {
         MSType = aInt;
     }
-    public void setMSData(String aStr) {
-        MSData = aStr;
-    }
+    public void setMSData(byte[] aBytes) {MSData = aBytes;}
     public void setMSResult(int aInt) {
         MSResult = aInt;
     }
@@ -91,7 +96,7 @@ public class Msg extends entity {
     public int getMSType() {
         return MSType;
     }
-    public String getMSData() {
+    public byte[] getMSData() {
         return MSData;
     }
     public int getMSResult() {

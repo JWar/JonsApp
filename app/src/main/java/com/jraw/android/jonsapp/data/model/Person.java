@@ -1,5 +1,7 @@
 package com.jraw.android.jonsapp.data.model;
 
+import android.arch.persistence.room.Entity;
+
 import com.jraw.android.jonsapp.utils.Utils;
 import org.json.JSONObject;
 
@@ -7,7 +9,7 @@ import org.json.JSONObject;
  * Created by JonGaming on 17/07/2017.
  *
  */
-
+@Entity(tableName = "person")
 public class Person extends entity {
     private String PEFname;
     private String PESname;

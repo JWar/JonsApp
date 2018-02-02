@@ -34,7 +34,7 @@ public class MsgsHolder extends AbstractHolder {
         super(view);
         mView = view;
         mBodyRL = view.findViewById(R.id.list_item_msgs_body_rl);
-        mTimeRL = view.findViewById(R.id.list_item_msgs_time_rl);
+//        mTimeRL = view.findViewById(R.id.list_item_msgs_time_rl);
         mDateTV = view.findViewById(R.id.list_item_msgs_time);
         mBodyTV = view.findViewById(R.id.list_item_msgs_text_view);
     }
@@ -50,7 +50,7 @@ public class MsgsHolder extends AbstractHolder {
         lp = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT,
                 RelativeLayout.LayoutParams.WRAP_CONTENT);
         lp.setMargins(2, 24, 2, 4);
-        lp.addRule(RelativeLayout.END_OF, R.id.list_item_msgs_time_rl);
+//        lp.addRule(RelativeLayout.END_OF, R.id.list_item_msgs_time_rl);
         mBodyRL.setLayoutParams(lp);
     }
 

@@ -2,6 +2,7 @@ package com.jraw.android.jonsapp.database;
 
 /**
  * Created by JonGaming on 29/06/2017.
+ *
  */
 
 public class DbSchema {
@@ -100,7 +101,7 @@ public class DbSchema {
             //Needs msg id
 //            public static final String IDINPHONE = "TXIdInPhone";
             public static final String TELFROM = "TXTelFrom";
-            public static final String TELTO = "TXTelTo";
+            public static final String TO = "TXTo";
             public static final String DATA = "TXData";
             public static final String TYPE = "TXType";
             public static final String TIMESTAMP = "TXTimestamp";

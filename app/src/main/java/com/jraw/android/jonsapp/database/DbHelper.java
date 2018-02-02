@@ -97,7 +97,7 @@ public class DbHelper extends SQLiteOpenHelper {
             "CREATE TABLE " + TxnTable.NAME + " (" +
                     TxnTable.Cols.ID + " INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, " +
                     TxnTable.Cols.TELFROM + " VARCHAR, " +
-                    TxnTable.Cols.TELTO + " VARCHAR, " +
+                    TxnTable.Cols.TO + " VARCHAR, " +
                     TxnTable.Cols.DATA + " VARCHAR DEFAULT NULL, " +
                     TxnTable.Cols.TYPE + " INTEGER(3) DEFAULT 0, " +
                     TxnTable.Cols.TIMESTAMP + " VARCHAR DEFAULT NULL, " +

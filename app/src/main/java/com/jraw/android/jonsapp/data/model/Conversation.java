@@ -1,5 +1,8 @@
 package com.jraw.android.jonsapp.data.model;
 
+import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.ForeignKey;
+
 import com.google.gson.annotations.SerializedName;
 import com.jraw.android.jonsapp.utils.Utils;
 
@@ -9,15 +12,15 @@ import org.json.JSONObject;
  * Created by JonGaming on 17/07/2017.
  *
  */
-
+@Entity(tableName = "conversation", foreignKeys = @ForeignKey(
+        entity = PeCo.class,
+        childColumns = "COPublicId",
+        parentColumns = "PCCOPublicId",
+        onDelete = ForeignKey.CASCADE))
 public class Conversation extends entity {
-    @SerializedName("title")
     private String COTitle;
-    @SerializedName("publicid")
     private int COPublicId;
-    @SerializedName("createdby")
     private String COCreatedBy;
-    @SerializedName("datecreated")
     private String CODateCreated;
 
     public Conversation() {}

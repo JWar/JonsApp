@@ -14,6 +14,7 @@ import com.jraw.android.jonsapp.data.source.local.MsgLocalDataSource;
 import com.jraw.android.jonsapp.database.BriteWrapper;
 import com.jraw.android.jonsapp.database.DbHelper;
 import com.jraw.android.jonsapp.data.source.remote.JonsAppApi;
+import com.jraw.android.jonsapp.database.JonsAppDatabase;
 import com.jraw.android.jonsapp.utils.schedulers.BaseSchedulerProvider;
 import com.jraw.android.jonsapp.utils.DoubleTypeAdapter;
 import com.jraw.android.jonsapp.utils.schedulers.SchedulerProvider;
@@ -29,7 +30,9 @@ import retrofit2.converter.gson.GsonConverterFactory;
  */
 
 public class Injection {
-
+    public static JonsAppDatabase provideJonsAppDatabase(@NonNull Context aContext) throws Exception {
+        return JonsAppDatabase.getInstance(aContext);
+    }
     public static ConversationRepository provideConversationRepository(@NonNull Context aContext) throws Exception {
         return ConversationRepository.getInstance(provideConversationDataSource(aContext));
     }

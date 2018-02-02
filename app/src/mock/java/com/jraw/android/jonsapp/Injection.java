@@ -14,6 +14,7 @@ import com.jraw.android.jonsapp.data.source.local.FakeMsgLocalDataSource;
 import com.jraw.android.jonsapp.data.source.local.MsgLocalDataSource;
 import com.jraw.android.jonsapp.database.BriteWrapper;
 import com.jraw.android.jonsapp.database.DbHelper;
+import com.jraw.android.jonsapp.database.JonsAppDatabase;
 import com.jraw.android.jonsapp.utils.schedulers.BaseSchedulerProvider;
 import com.jraw.android.jonsapp.utils.schedulers.SchedulerProvider;
 import com.squareup.sqlbrite2.SqlBrite;
@@ -49,5 +50,8 @@ public class Injection {
     }
     public static MsgDataSource provideMsgDataSource(@NonNull Context aContext) throws Exception {
         return MsgLocalDataSource.getInstance(provideBriteWrapper(aContext));
+    }
+    public static JonsAppDatabase provideJonsAppDatabase(@NonNull Context aContext) throws Exception {
+        return JonsAppDatabase.getInstance(aContext);
     }
 }
