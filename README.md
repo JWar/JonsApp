@@ -14,7 +14,7 @@ There is a back end part but this uses software that can't be public - treat the
 the by.
 
 Of course the back end doesnt work like WhatsApp, they use their own system (presumably sockets...) and they also have encryption etc...
-but the principles should be similar and JonsApp should be written in a way that allows easy adding of encryption, this presumably would just make use of an 'encryption
+but the principles should be similar and JonsApp shou ld be written in a way that allows easy adding of encryption, this presumably would just make use of an 'encryption
 object' that does its thing on any new messages received or sent?
 
 Notes/Things to look out for:
@@ -49,9 +49,7 @@ Server-side:
     given that cant guarantee WHEN the Firebase Msg is sent.
     Need to think about TelTo! How should server side handle the multiple Tels...?
 
-Phone-side:
-    Finish database set up (schema, dbhelper etc...).
+Phone-side:    
     Finish UI. Need to check whats been done.
-    Get basic new conversation/new contact handling sorted.
-    Lets get some dummy data in the system too...
+    Get basic new conversation/new contact handling sorted.    
 
