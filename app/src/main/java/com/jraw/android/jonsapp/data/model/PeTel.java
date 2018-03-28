@@ -9,12 +9,12 @@ import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.ForeignKey;
 import android.arch.persistence.room.Index;
 
-@Entity(tableName = "petel", foreignKeys = @ForeignKey(
+@Entity(tableName = "petel"/*, foreignKeys = @ForeignKey(
         entity = Person.class,
         childColumns = "PTPEId",
         parentColumns = "id",
         onDelete = ForeignKey.CASCADE), indices = {@Index(value = {"PTPEId", "PTTelId"},
-        unique = true)})
+        unique = true)}*/)
 public class PeTel extends entity {
     private int PTPEId;
     private int PTTelId;

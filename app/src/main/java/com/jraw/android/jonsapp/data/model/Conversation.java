@@ -12,11 +12,11 @@ import org.json.JSONObject;
  * Created by JonGaming on 17/07/2017.
  *
  */
-@Entity(tableName = "conversation", foreignKeys = @ForeignKey(
+@Entity(tableName = "conversation"/*, foreignKeys = @ForeignKey(
         entity = PeCo.class,
         childColumns = "COPublicId",
         parentColumns = "PCCOPublicId",
-        onDelete = ForeignKey.CASCADE))
+        onDelete = ForeignKey.CASCADE)*/)
 public class Conversation extends entity {
     private String COTitle;
     private int COPublicId;

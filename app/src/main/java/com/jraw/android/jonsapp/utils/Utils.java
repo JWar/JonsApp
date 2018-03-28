@@ -1,6 +1,9 @@
 package com.jraw.android.jonsapp.utils;
 
+import android.content.Context;
 import android.database.Cursor;
+import android.support.annotation.NonNull;
+import android.util.DisplayMetrics;
 import android.util.Log;
 
 /*
@@ -36,5 +39,11 @@ public class Utils {
         if (aCursor!=null&&!aCursor.isClosed()) {
             aCursor.close();
         }
+    }
+    public static int pixelsToDp(@NonNull Context aContext, float aDp) {
+        //Calculates pixels to dp.
+        DisplayMetrics metrics = aContext.getResources().getDisplayMetrics();
+        float fpixels = metrics.density * aDp;
+        return(int) (fpixels + 0.5f);
     }
 }

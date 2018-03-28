@@ -8,13 +8,13 @@ import android.arch.persistence.room.Index;
  * Created by JWar on 02/02/2018.
  *
  */
-@Entity(tableName = "peco", foreignKeys = @ForeignKey(
+@Entity(tableName = "peco"/*, foreignKeys = @ForeignKey(
         entity = Person.class,
         childColumns = "PCPEId",
         parentColumns = "id",
         onDelete = ForeignKey.CASCADE), indices = {@Index(value = {"PCPEId", "PCCOPublicId"},
-        unique = true)})
-public class PeCo {
+        unique = true)}*/)
+public class PeCo extends entity {
     private int PCPEId;
     private int PCCOPublicId;
 

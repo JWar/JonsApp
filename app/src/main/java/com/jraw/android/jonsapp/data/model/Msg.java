@@ -13,11 +13,11 @@ import com.jraw.android.jonsapp.database.DbSchema.MsgTable;
  * The 200 status simply says if there is a successful match with the tokens, basically saying if the Msg CAN be sent...
  * Would have to rig up a response from the device itself to confirm Msg has been received...
  */
-@Entity(tableName = "msg", foreignKeys = @ForeignKey(
+@Entity(tableName = "msg"/*, foreignKeys = @ForeignKey(
                 entity = Conversation.class,
                 childColumns = "MSCOPublicId",
                 parentColumns = "COPublicId",
-                onDelete = ForeignKey.CASCADE))
+                onDelete = ForeignKey.CASCADE)*/)
 public class Msg extends entity {
 
     public enum MSG_TYPES {

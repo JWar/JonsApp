@@ -52,7 +52,7 @@ public class MsgCursorWrapper extends CursorWrapper {
             }
             if (getColumnIndex(MsgTable.Cols.DATA) > -1) {
                 if (!isNull(getColumnIndex(MsgTable.Cols.DATA))) {
-                    msg.setMSData(getString(getColumnIndex(MsgTable.Cols.DATA)));
+                    msg.setMSData(getBlob(getColumnIndex(MsgTable.Cols.DATA)));
                 }
             }
             if (getColumnIndex(MsgTable.Cols.RESULT) > -1) {

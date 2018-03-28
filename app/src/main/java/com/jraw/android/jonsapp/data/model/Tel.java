@@ -11,14 +11,14 @@ import org.json.JSONObject;
  * Created by JonGaming on 17/07/2017.
  *
  */
-@Entity(tableName = "tel",
+@Entity(tableName = "tel"/*,
         foreignKeys = @ForeignKey(
         entity = PeTel.class,
         childColumns = "id",
         parentColumns = "PTTelId",
         onDelete = ForeignKey.CASCADE),
         indices = {@Index(value = {"TENumber"},
-        unique = true)})
+        unique = true)}*/)
 public class Tel extends entity {
     private String TENumber;
 

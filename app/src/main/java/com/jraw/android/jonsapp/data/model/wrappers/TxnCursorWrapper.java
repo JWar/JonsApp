@@ -36,7 +36,7 @@ public class TxnCursorWrapper extends CursorWrapper {
             }
             if (getColumnIndex(TxnTable.Cols.RESULT)>-1) {
                 if (!isNull(getColumnIndex(TxnTable.Cols.RESULT))) {
-                    txn.setTXResult(getString(getColumnIndex(TxnTable.Cols.RESULT)));
+                    txn.setTXResult(getInt(getColumnIndex(TxnTable.Cols.RESULT)));
                 }
             }
             return txn;
